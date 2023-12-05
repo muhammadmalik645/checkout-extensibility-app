@@ -32,14 +32,19 @@ function Extension() {
 
   const merch = useCartLineTarget();
   const productID = merch.merchandise.product.id
+  const isProductChild = merch.lineComponents
   const lineIds = useCartLines();
-  
+
   useEffect(() => {
     (async () => {
       await fetchProducts(productID);
       
     })();
   }, []);
+
+  useEffect(() => {
+    if(isProductChild.length >= 2) setcheckbox_value(true); 
+  }, [lineIds, products]);
 
   async function fetchProducts(id) {
     setLoading(true);
@@ -113,12 +118,14 @@ function Extension() {
     }
     else if(e == false){
       
-      let lineID = lineIds.find((line)=> {
-        if(line.merchandise.id === variantId){
-          return line
-        }
-      })
-
+      // let lineID = lineIds.find((line)=> {
+      //   if(line.lineComponents === variantId){
+      //     return line
+      //   }
+      // })
+      
+      const childinBundle = merch.lineComponents[1]
+      console.log('childinBundle', childinBundle)
       // setcheckbox_value(false,()=>{
       //   saveCheckboxValue();
       // })
@@ -126,12 +133,11 @@ function Extension() {
 
        await applyCartLinesChange({
          type: 'removeCartLine',
-         id: lineID.id,
-         quantity: 1,
+         id: childinBundle.id,
+         quantity: childinBundle.quantity,
        });
       // console.log(merch)
-      // console.log('DELETING')
-      
+      // console.log('DELETING')      
     }  
     
   }
@@ -144,6 +150,7 @@ function Extension() {
     const value = (await storeCheckbox.read('checkbox_status')) || false;
     setcheckbox_value(value);
   };
+
   
   //const {title: merchantTitle, description: merchantDesc, collapsible: collapsibleStatus, status: merchantStatus} = useSettings();
   //console.log("Products******",products)
@@ -155,7 +162,7 @@ function Extension() {
   let productMetafield = products ?? "empty"
   if(products){
     return(
-      <Checkbox value={checkbox_value} onChange={(e) => handleAddToCart(products, e)}>
+      <Checkbox checked={checkbox_value} onChange={(e) => handleAddToCart(products, e)}>
         Add Gift Wrap
       </Checkbox>
     )

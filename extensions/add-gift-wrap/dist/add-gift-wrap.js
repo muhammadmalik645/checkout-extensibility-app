@@ -19553,12 +19553,17 @@ ${errorInfo.componentStack}`);
     const storeCheckbox = useStorage();
     const merch = useCartLineTarget();
     const productID = merch.merchandise.product.id;
+    const isProductChild = merch.lineComponents;
     const lineIds = useCartLines();
     (0, import_react11.useEffect)(() => {
       (() => __async(this, null, function* () {
         yield fetchProducts(productID);
       }))();
     }, []);
+    (0, import_react11.useEffect)(() => {
+      if (isProductChild.length >= 2)
+        setcheckbox_value(true);
+    }, [lineIds, products]);
     function fetchProducts(id) {
       return __async(this, null, function* () {
         var _a, _b, _c;
@@ -19619,16 +19624,13 @@ ${errorInfo.componentStack}`);
           });
           yield updateAttributes(lineID.id);
         } else if (e == false) {
-          let lineID = lineIds.find((line) => {
-            if (line.merchandise.id === variantId) {
-              return line;
-            }
-          });
+          const childinBundle = merch.lineComponents[1];
+          console.log("childinBundle", childinBundle);
           setcheckbox_value(false);
           yield applyCartLinesChange({
             type: "removeCartLine",
-            id: lineID.id,
-            quantity: 1
+            id: childinBundle.id,
+            quantity: childinBundle.quantity
           });
         }
       });
@@ -19642,10 +19644,11 @@ ${errorInfo.componentStack}`);
     });
     let productMetafield = products != null ? products : "empty";
     if (products) {
-      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Checkbox2, { value: checkbox_value, onChange: (e) => handleAddToCart(products, e), children: "Add Gift Wrap" });
+      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Checkbox2, { checked: checkbox_value, onChange: (e) => handleAddToCart(products, e), children: "Add Gift Wrap" });
     } else {
       return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, {});
     }
     ;
   }
 })();
+//# sourceMappingURL=add-gift-wrap.js.map
