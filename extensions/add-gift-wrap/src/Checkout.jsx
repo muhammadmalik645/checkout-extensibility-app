@@ -13,6 +13,7 @@ import {
   useSettings,
   Checkbox,
   useApplyAttributeChange,
+  useStorage,
 } from '@shopify/ui-extensions-react/checkout';
 
 
@@ -27,11 +28,11 @@ function Extension() {
   const [products, setProducts] = useState();
   const [loading, setLoading] = useState(false);
   const [checkbox_value, setcheckbox_value] = useState(false);
+  const storeCheckbox = useStorage()
 
   const merch = useCartLineTarget();
   const productID = merch.merchandise.product.id
   const lineIds = useCartLines();
-  const attributes = useApplyAttributeChange();
   
   useEffect(() => {
     (async () => {
@@ -75,8 +76,8 @@ function Extension() {
       type: 'updateCartLine',
       id: id,
       attributes: [{
-        key: 'merger',
-        value: 'true',
+        key: '_merger',
+        value: `${id}`,
       }]
     });
   }
@@ -84,21 +85,28 @@ function Extension() {
   async function handleAddToCart(variantId, e) {
     //console.log(variantId, e)
     if(e == true){
-      
-      setcheckbox_value(true)
-      await applyCartLinesChange({
-        type: 'addCartLine',
-        merchandiseId: variantId,
-        quantity: 1,
-        
-      });
-      
+     
       let lineID = lineIds.find((line)=> {
         //console.log({'LINE ID':line.merchandise.product.id})
         if(line.merchandise.product.id === productID){
           return line
         }
       })
+      
+      // setcheckbox_value(true,()=>{
+      //   saveCheckboxValue();
+      // })
+      setcheckbox_value(true)
+      await applyCartLinesChange({
+        type: 'addCartLine',
+        merchandiseId: variantId,
+        quantity: 1,
+        attributes: [{
+          key: '_merger',
+          value: `${lineID.id}`,
+        }]
+      });
+
       //console.log({'ATTRIBUTE UPDATED': lineID},{'EXISTING LINE IDS': lineIds},{'PRODUCT ID': productID})
       await updateAttributes(lineID.id)
       
@@ -111,7 +119,11 @@ function Extension() {
         }
       })
 
-       setcheckbox_value(false)
+      // setcheckbox_value(false,()=>{
+      //   saveCheckboxValue();
+      // })
+      setcheckbox_value(false)
+
        await applyCartLinesChange({
          type: 'removeCartLine',
          id: lineID.id,
@@ -123,6 +135,15 @@ function Extension() {
     }  
     
   }
+
+  const saveCheckboxValue = async ()=>{
+    await storeCheckbox.write('checkbox_status',checkbox_value)
+  }
+
+  const loadCheckboxValue = async () => {
+    const value = (await storeCheckbox.read('checkbox_status')) || false;
+    setcheckbox_value(value);
+  };
   
   //const {title: merchantTitle, description: merchantDesc, collapsible: collapsibleStatus, status: merchantStatus} = useSettings();
   //console.log("Products******",products)
@@ -130,6 +151,7 @@ function Extension() {
   // const titleBanner = merchantTitle ?? 'Custom Banner';
   // const description = merchantDesc ?? 'This is the description';
   // const collapsible= collapsibleStatus ?? true
+  //loadCheckboxValue()
   let productMetafield = products ?? "empty"
   if(products){
     return(

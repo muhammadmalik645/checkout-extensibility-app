@@ -19512,15 +19512,6 @@ ${errorInfo.componentStack}`);
     return subscription.current;
   }
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/attributes.mjs
-  function useApplyAttributeChange() {
-    const api = useApi();
-    if ("applyAttributeChange" in api) {
-      return api.applyAttributeChange;
-    }
-    throw new ExtensionHasNoMethodError("applyAttributeChange", api.extension.target);
-  }
-
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-lines.mjs
   function useCartLines() {
     const {
@@ -19545,6 +19536,11 @@ ${errorInfo.componentStack}`);
     return useSubscription(api.target);
   }
 
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/storage.mjs
+  function useStorage() {
+    return useApi().storage;
+  }
+
   // extensions/add-gift-wrap/src/Checkout.jsx
   var import_jsx_runtime4 = __toESM(require_jsx_runtime());
   var Checkout_default = reactExtension("purchase.checkout.cart-line-item.render-after", () => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Extension, {}));
@@ -19554,10 +19550,10 @@ ${errorInfo.componentStack}`);
     const [products, setProducts] = (0, import_react11.useState)();
     const [loading, setLoading] = (0, import_react11.useState)(false);
     const [checkbox_value, setcheckbox_value] = (0, import_react11.useState)(false);
+    const storeCheckbox = useStorage();
     const merch = useCartLineTarget();
     const productID = merch.merchandise.product.id;
     const lineIds = useCartLines();
-    const attributes = useApplyAttributeChange();
     (0, import_react11.useEffect)(() => {
       (() => __async(this, null, function* () {
         yield fetchProducts(productID);
@@ -19597,8 +19593,8 @@ ${errorInfo.componentStack}`);
           type: "updateCartLine",
           id,
           attributes: [{
-            key: "merger",
-            value: "true"
+            key: "_merger",
+            value: `${id}`
           }]
         });
       });
@@ -19606,16 +19602,20 @@ ${errorInfo.componentStack}`);
     function handleAddToCart(variantId, e) {
       return __async(this, null, function* () {
         if (e == true) {
-          setcheckbox_value(true);
-          yield applyCartLinesChange({
-            type: "addCartLine",
-            merchandiseId: variantId,
-            quantity: 1
-          });
           let lineID = lineIds.find((line) => {
             if (line.merchandise.product.id === productID) {
               return line;
             }
+          });
+          setcheckbox_value(true);
+          yield applyCartLinesChange({
+            type: "addCartLine",
+            merchandiseId: variantId,
+            quantity: 1,
+            attributes: [{
+              key: "_merger",
+              value: `${lineID.id}`
+            }]
           });
           yield updateAttributes(lineID.id);
         } else if (e == false) {
@@ -19633,6 +19633,13 @@ ${errorInfo.componentStack}`);
         }
       });
     }
+    const saveCheckboxValue = () => __async(this, null, function* () {
+      yield storeCheckbox.write("checkbox_status", checkbox_value);
+    });
+    const loadCheckboxValue = () => __async(this, null, function* () {
+      const value = (yield storeCheckbox.read("checkbox_status")) || false;
+      setcheckbox_value(value);
+    });
     let productMetafield = products != null ? products : "empty";
     if (products) {
       return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Checkbox2, { value: checkbox_value, onChange: (e) => handleAddToCart(products, e), children: "Add Gift Wrap" });
@@ -19642,4 +19649,3 @@ ${errorInfo.componentStack}`);
     ;
   }
 })();
-//# sourceMappingURL=add-gift-wrap.js.map

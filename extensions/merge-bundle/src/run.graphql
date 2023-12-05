@@ -1,8 +1,19 @@
-query RunInput {
+query Input {
   cart {
     lines {
       id
       quantity
+      merge: attribute(key:"_merger"){
+        value
+      }
+      merchandise {
+        ... on ProductVariant {
+          id
+          product {
+            title
+          }
+        }
+      }
     }
   }
 }
