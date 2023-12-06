@@ -44,7 +44,8 @@ function Extension() {
 
   useEffect(() => {
     if(isProductChild.length >= 2) setcheckbox_value(true); 
-  }, [lineIds, products]);
+    console.log({'LineIds':lineIds},{'Products': products}, {'Merch': merch})
+  }, [lineIds, products ,merch]);
 
   async function fetchProducts(id) {
     setLoading(true);
@@ -63,7 +64,7 @@ function Extension() {
       );
       //addProduct(data.data.product.metafield.value)
       if(data?.data?.product?.metafield?.value){
-        setProducts(data.data.product.metafield.value);
+        setProducts(data.data.product);
       }    
       
       
@@ -102,30 +103,37 @@ function Extension() {
       //   saveCheckboxValue();
       // })
       setcheckbox_value(true)
-      await applyCartLinesChange({
-        type: 'addCartLine',
-        merchandiseId: variantId,
-        quantity: 1,
-        attributes: [{
-          key: '_merger',
-          value: `${lineID.id}`,
-        }]
-      });
+      if(isProductChild.length < 2){
+        await applyCartLinesChange({
+          type: 'addCartLine',
+          merchandiseId: variantId,
+          quantity: 1,
+          attributes: [{
+            key: '_merger',
+            value: `${lineID.id}`,
+          }]
+        });     
 
-      //console.log({'ATTRIBUTE UPDATED': lineID},{'EXISTING LINE IDS': lineIds},{'PRODUCT ID': productID})
-      await updateAttributes(lineID.id)
-      
+        //console.log({'ATTRIBUTE UPDATED': lineID},{'EXISTING LINE IDS': lineIds},{'PRODUCT ID': productID})
+        await updateAttributes(lineID.id)
+        console.log('lineIds HERE',lineIds)
+      }
     }
     else if(e == false){
       
-      // let lineID = lineIds.find((line)=> {
-      //   if(line.lineComponents === variantId){
-      //     return line
-      //   }
-      // })
+      let lineID = lineIds.find((line)=> {
+        console.log(line.merchandise.id === variantId)
+        if(line.merchandise.id === variantId){
+          return line
+        }
+      })?.id
       
-      const childinBundle = merch.lineComponents[1]
-      console.log('childinBundle', childinBundle)
+      // const merchID = merch.merchandise.id
+      // const merchQty = merch.quantity
+      // console.log('Merch', lineID)
+      //console.log('merch line child', lineID.lineComponents[0].id)
+
+      // console.log('newLineId', newLineId)
       // setcheckbox_value(false,()=>{
       //   saveCheckboxValue();
       // })
@@ -133,36 +141,23 @@ function Extension() {
 
        await applyCartLinesChange({
          type: 'removeCartLine',
-         id: childinBundle.id,
-         quantity: childinBundle.quantity,
+         id: lineID,
+         quantity: 1,
        });
+      //  await applyCartLinesChange({
+      //   type: 'addCartLine',
+      //   id: merchID,
+      //   quantity: merchQty,
+      // });
       // console.log(merch)
       // console.log('DELETING')      
     }  
     
   }
 
-  const saveCheckboxValue = async ()=>{
-    await storeCheckbox.write('checkbox_status',checkbox_value)
-  }
-
-  const loadCheckboxValue = async () => {
-    const value = (await storeCheckbox.read('checkbox_status')) || false;
-    setcheckbox_value(value);
-  };
-
-  
-  //const {title: merchantTitle, description: merchantDesc, collapsible: collapsibleStatus, status: merchantStatus} = useSettings();
-  //console.log("Products******",products)
-  // const status = merchantStatus ?? 'info';
-  // const titleBanner = merchantTitle ?? 'Custom Banner';
-  // const description = merchantDesc ?? 'This is the description';
-  // const collapsible= collapsibleStatus ?? true
-  //loadCheckboxValue()
-  let productMetafield = products ?? "empty"
   if(products){
     return(
-      <Checkbox checked={checkbox_value} onChange={(e) => handleAddToCart(products, e)}>
+      <Checkbox name="{products.title}" checked={checkbox_value} onChange={(e) => handleAddToCart(products.metafield.value, e)}>
         Add Gift Wrap
       </Checkbox>
     )

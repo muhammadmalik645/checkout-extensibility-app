@@ -19563,7 +19563,8 @@ ${errorInfo.componentStack}`);
     (0, import_react11.useEffect)(() => {
       if (isProductChild.length >= 2)
         setcheckbox_value(true);
-    }, [lineIds, products]);
+      console.log({ "LineIds": lineIds }, { "Products": products }, { "Merch": merch });
+    }, [lineIds, products, merch]);
     function fetchProducts(id) {
       return __async(this, null, function* () {
         var _a, _b, _c;
@@ -19582,7 +19583,7 @@ ${errorInfo.componentStack}`);
         }`
           );
           if ((_c = (_b = (_a = data == null ? void 0 : data.data) == null ? void 0 : _a.product) == null ? void 0 : _b.metafield) == null ? void 0 : _c.value) {
-            setProducts(data.data.product.metafield.value);
+            setProducts(data.data.product);
           }
         } catch (error) {
           console.error(error);
@@ -19606,6 +19607,7 @@ ${errorInfo.componentStack}`);
     }
     function handleAddToCart(variantId, e) {
       return __async(this, null, function* () {
+        var _a;
         if (e == true) {
           let lineID = lineIds.find((line) => {
             if (line.merchandise.product.id === productID) {
@@ -19613,38 +19615,37 @@ ${errorInfo.componentStack}`);
             }
           });
           setcheckbox_value(true);
-          yield applyCartLinesChange({
-            type: "addCartLine",
-            merchandiseId: variantId,
-            quantity: 1,
-            attributes: [{
-              key: "_merger",
-              value: `${lineID.id}`
-            }]
-          });
-          yield updateAttributes(lineID.id);
+          if (isProductChild.length < 2) {
+            yield applyCartLinesChange({
+              type: "addCartLine",
+              merchandiseId: variantId,
+              quantity: 1,
+              attributes: [{
+                key: "_merger",
+                value: `${lineID.id}`
+              }]
+            });
+            yield updateAttributes(lineID.id);
+            console.log("lineIds HERE", lineIds);
+          }
         } else if (e == false) {
-          const childinBundle = merch.lineComponents[1];
-          console.log("childinBundle", childinBundle);
+          let lineID = (_a = lineIds.find((line) => {
+            console.log(line.merchandise.id === variantId);
+            if (line.merchandise.id === variantId) {
+              return line;
+            }
+          })) == null ? void 0 : _a.id;
           setcheckbox_value(false);
           yield applyCartLinesChange({
             type: "removeCartLine",
-            id: childinBundle.id,
-            quantity: childinBundle.quantity
+            id: lineID,
+            quantity: 1
           });
         }
       });
     }
-    const saveCheckboxValue = () => __async(this, null, function* () {
-      yield storeCheckbox.write("checkbox_status", checkbox_value);
-    });
-    const loadCheckboxValue = () => __async(this, null, function* () {
-      const value = (yield storeCheckbox.read("checkbox_status")) || false;
-      setcheckbox_value(value);
-    });
-    let productMetafield = products != null ? products : "empty";
     if (products) {
-      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Checkbox2, { checked: checkbox_value, onChange: (e) => handleAddToCart(products, e), children: "Add Gift Wrap" });
+      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Checkbox2, { name: "{products.title}", checked: checkbox_value, onChange: (e) => handleAddToCart(products.metafield.value, e), children: "Add Gift Wrap" });
     } else {
       return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, {});
     }
