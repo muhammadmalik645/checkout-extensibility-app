@@ -14,6 +14,7 @@ import {
   Checkbox,
   useApplyAttributeChange,
   useStorage,
+  useAttributeValues,
 } from '@shopify/ui-extensions-react/checkout';
 
 
@@ -29,7 +30,7 @@ function Extension() {
   const [loading, setLoading] = useState(false);
   const [checkbox_value, setcheckbox_value] = useState(false);
   const storeCheckbox = useStorage()
-
+  const [merger] = useAttributeValues(["_merger"])
   const merch = useCartLineTarget();
   const productID = merch.merchandise.product.id
   const isProductChild = merch.lineComponents
@@ -44,8 +45,8 @@ function Extension() {
 
   useEffect(() => {
     if(isProductChild.length >= 2) setcheckbox_value(true); 
-    console.log({'LineIds':lineIds},{'Products': products}, {'Merch': merch})
-  }, [lineIds, products ,merch]);
+    console.log({'LineIds':lineIds},{'Products': products}, {'Merch': merch},{'merger': merger})
+  }, [lineIds, products ,merch, merger]);
 
   async function fetchProducts(id) {
     setLoading(true);
@@ -127,7 +128,7 @@ function Extension() {
           return line
         }
       })?.id
-      
+      console.log('child IDs ', lineIds[0].lineComponents[1].id)
       // const merchID = merch.merchandise.id
       // const merchQty = merch.quantity
       // console.log('Merch', lineID)
@@ -139,10 +140,12 @@ function Extension() {
       // })
       setcheckbox_value(false)
 
+      
+
        await applyCartLinesChange({
          type: 'removeCartLine',
-         id: lineID,
-         quantity: 1,
+         id: lineIds[0].lineComponents[1].id,
+         quantity: lineIds[0].quantity,
        });
       //  await applyCartLinesChange({
       //   type: 'addCartLine',

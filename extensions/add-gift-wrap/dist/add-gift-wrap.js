@@ -19512,6 +19512,21 @@ ${errorInfo.componentStack}`);
     return subscription.current;
   }
 
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/attributes.mjs
+  function useAttributes() {
+    return useSubscription(useApi().attributes);
+  }
+  function useAttributeValues(keys) {
+    const attributes = useAttributes();
+    if (!(attributes !== null && attributes !== void 0 && attributes.length)) {
+      return [];
+    }
+    return keys.map((key) => {
+      const attribute = attributes.find((attribute2) => attribute2.key === key);
+      return attribute === null || attribute === void 0 ? void 0 : attribute.value;
+    });
+  }
+
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-lines.mjs
   function useCartLines() {
     const {
@@ -19551,6 +19566,7 @@ ${errorInfo.componentStack}`);
     const [loading, setLoading] = (0, import_react11.useState)(false);
     const [checkbox_value, setcheckbox_value] = (0, import_react11.useState)(false);
     const storeCheckbox = useStorage();
+    const [merger] = useAttributeValues(["_merger"]);
     const merch = useCartLineTarget();
     const productID = merch.merchandise.product.id;
     const isProductChild = merch.lineComponents;
@@ -19563,8 +19579,8 @@ ${errorInfo.componentStack}`);
     (0, import_react11.useEffect)(() => {
       if (isProductChild.length >= 2)
         setcheckbox_value(true);
-      console.log({ "LineIds": lineIds }, { "Products": products }, { "Merch": merch });
-    }, [lineIds, products, merch]);
+      console.log({ "LineIds": lineIds }, { "Products": products }, { "Merch": merch }, { "merger": merger });
+    }, [lineIds, products, merch, merger]);
     function fetchProducts(id) {
       return __async(this, null, function* () {
         var _a, _b, _c;
@@ -19635,11 +19651,12 @@ ${errorInfo.componentStack}`);
               return line;
             }
           })) == null ? void 0 : _a.id;
+          console.log("child IDs ", lineIds[0].lineComponents[1].id);
           setcheckbox_value(false);
           yield applyCartLinesChange({
             type: "removeCartLine",
-            id: lineID,
-            quantity: 1
+            id: lineIds[0].lineComponents[1].id,
+            quantity: lineIds[0].quantity
           });
         }
       });
