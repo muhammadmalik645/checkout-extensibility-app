@@ -30,7 +30,7 @@ function Extension() {
   const [loading, setLoading] = useState(false);
   const [checkbox_value, setcheckbox_value] = useState(false);
   const storeCheckbox = useStorage()
-  const [merger] = useAttributeValues(["_merger"])
+  //const [merger] = useAttributeValues(["_merger"])
   const merch = useCartLineTarget();
   const productID = merch.merchandise.product.id
   const isProductChild = merch.lineComponents
@@ -45,8 +45,8 @@ function Extension() {
 
   useEffect(() => {
     if(isProductChild.length >= 2) setcheckbox_value(true); 
-    console.log({'LineIds':lineIds},{'Products': products}, {'Merch': merch},{'merger': merger})
-  }, [lineIds, products ,merch, merger]);
+    console.log({'LineIds':lineIds},{'Products': products}, {'Merch': merch})
+  }, [lineIds, products ,merch]);
 
   async function fetchProducts(id) {
     setLoading(true);
@@ -78,7 +78,7 @@ function Extension() {
   }
 
   async function updateAttributes(id){
-    console.log('ID of Parent Product', id)
+    // console.log('ID of Parent Product', id)
     await applyCartLinesChange({
       type: 'updateCartLine',
       id: id,
@@ -117,18 +117,18 @@ function Extension() {
 
         //console.log({'ATTRIBUTE UPDATED': lineID},{'EXISTING LINE IDS': lineIds},{'PRODUCT ID': productID})
         await updateAttributes(lineID.id)
-        console.log('lineIds HERE',lineIds)
+        // console.log('lineIds HERE',lineIds)
       }
     }
     else if(e == false){
       
       let lineID = lineIds.find((line)=> {
-        console.log(line.merchandise.id === variantId)
+        // console.log(line.merchandise.id === variantId)
         if(line.merchandise.id === variantId){
           return line
         }
       })?.id
-      console.log('child IDs ', lineIds[0].lineComponents[1].id)
+      // console.log('child IDs ', lineIds[0].lineComponents[1].id)
       // const merchID = merch.merchandise.id
       // const merchQty = merch.quantity
       // console.log('Merch', lineID)
@@ -144,8 +144,8 @@ function Extension() {
 
        await applyCartLinesChange({
          type: 'removeCartLine',
-         id: lineIds[0].lineComponents[1].id,
-         quantity: lineIds[0].quantity,
+         id: lineID,
+         quantity: 1,
        });
       //  await applyCartLinesChange({
       //   type: 'addCartLine',

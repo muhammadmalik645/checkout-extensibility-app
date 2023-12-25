@@ -30,11 +30,11 @@ export function run(input) {
           cartLines: [
             {
               cartLineId: bundle[0].id,
-              quantity: bundle[0].quantity
+              quantity: 1
             },
             {
               cartLineId: bundle[1].id,
-              quantity: bundle[1].quantity
+              quantity: 1
             }
           ]
         }
@@ -43,6 +43,7 @@ export function run(input) {
     }
   })
   if(operations.length > 0){
+    console.log('SUCCESS')
     return { operations }
   }
   return NO_CHANGES;

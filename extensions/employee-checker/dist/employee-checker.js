@@ -627,7 +627,7 @@
             var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
             return newElement;
           }
-          function cloneElement(element, config, children) {
+          function cloneElement2(element, config, children) {
             if (element === null || element === void 0) {
               throw new Error("React.cloneElement(...): The argument must be a React element, but you passed " + element + ".");
             }
@@ -675,7 +675,7 @@
             }
             return ReactElement(element.type, key, ref, self, source, owner, props);
           }
-          function isValidElement2(object) {
+          function isValidElement3(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
           }
           var SEPARATOR = ".";
@@ -740,7 +740,7 @@
                   return c;
                 });
               } else if (mappedChild != null) {
-                if (isValidElement2(mappedChild)) {
+                if (isValidElement3(mappedChild)) {
                   {
                     if (mappedChild.key && (!_child || _child.key !== mappedChild.key)) {
                       checkKeyStringCoercion(mappedChild.key);
@@ -828,7 +828,7 @@
             }) || [];
           }
           function onlyChild(children) {
-            if (!isValidElement2(children)) {
+            if (!isValidElement3(children)) {
               throw new Error("React.Children.only expected to receive a single React element child.");
             }
             return children;
@@ -1157,7 +1157,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useLayoutEffect(create, deps);
           }
-          function useCallback(callback, deps) {
+          function useCallback2(callback, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
@@ -1559,11 +1559,11 @@
             if (isArray(node)) {
               for (var i = 0; i < node.length; i++) {
                 var child = node[i];
-                if (isValidElement2(child)) {
+                if (isValidElement3(child)) {
                   validateExplicitKey(child, parentType);
                 }
               }
-            } else if (isValidElement2(node)) {
+            } else if (isValidElement3(node)) {
               if (node._store) {
                 node._store.validated = true;
               }
@@ -1574,7 +1574,7 @@
                   var iterator = iteratorFn.call(node);
                   var step;
                   while (!(step = iterator.next()).done) {
-                    if (isValidElement2(step.value)) {
+                    if (isValidElement3(step.value)) {
                       validateExplicitKey(step.value, parentType);
                     }
                   }
@@ -1697,7 +1697,7 @@
             return validatedFactory;
           }
           function cloneElementWithValidation(element, props, children) {
-            var newElement = cloneElement.apply(this, arguments);
+            var newElement = cloneElement2.apply(this, arguments);
             for (var i = 2; i < arguments.length; i++) {
               validateChildKeys(arguments[i], newElement.type);
             }
@@ -1918,12 +1918,12 @@
           exports.createFactory = createFactory;
           exports.createRef = createRef;
           exports.forwardRef = forwardRef;
-          exports.isValidElement = isValidElement2;
+          exports.isValidElement = isValidElement3;
           exports.lazy = lazy;
           exports.memo = memo2;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
-          exports.useCallback = useCallback;
+          exports.useCallback = useCallback2;
           exports.useContext = useContext3;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
@@ -2495,7 +2495,7 @@
           var HostPortal = 4;
           var HostComponent = 5;
           var HostText = 6;
-          var Fragment2 = 7;
+          var Fragment = 7;
           var Mode = 8;
           var ContextConsumer = 9;
           var ContextProvider = 10;
@@ -2635,7 +2635,7 @@
                 return "DehydratedFragment";
               case ForwardRef:
                 return getWrappedName$1(type, type.render, "ForwardRef");
-              case Fragment2:
+              case Fragment:
                 return "Fragment";
               case HostComponent:
                 return type;
@@ -7053,7 +7053,7 @@
               }
             }
             function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-              if (current2 === null || current2.tag !== Fragment2) {
+              if (current2 === null || current2.tag !== Fragment) {
                 var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
                 created.return = returnFiber;
                 return created;
@@ -7456,7 +7456,7 @@
                 if (child.key === key) {
                   var elementType = element.type;
                   if (elementType === REACT_FRAGMENT_TYPE) {
-                    if (child.tag === Fragment2) {
+                    if (child.tag === Fragment) {
                       deleteRemainingChildren(returnFiber, child.sibling);
                       var existing = useFiber(child, element.props.children);
                       existing.return = returnFiber;
@@ -11633,7 +11633,7 @@
                 var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
                 return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
               }
-              case Fragment2:
+              case Fragment:
                 return updateFragment(current2, workInProgress2, renderLanes2);
               case Mode:
                 return updateMode(current2, workInProgress2, renderLanes2);
@@ -12074,7 +12074,7 @@
               case SimpleMemoComponent:
               case FunctionComponent:
               case ForwardRef:
-              case Fragment2:
+              case Fragment:
               case Mode:
               case Profiler:
               case ContextConsumer:
@@ -16840,7 +16840,7 @@
             return fiber;
           }
           function createFiberFromFragment(elements, mode, lanes, key) {
-            var fiber = createFiber(Fragment2, elements, key, mode);
+            var fiber = createFiber(Fragment, elements, key, mode);
             fiber.lanes = lanes;
             return fiber;
           }
@@ -18194,7 +18194,7 @@
           {
             propTypesMisspellWarningShown = false;
           }
-          function isValidElement2(object) {
+          function isValidElement3(object) {
             {
               return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
             }
@@ -18261,11 +18261,11 @@
               if (isArray(node)) {
                 for (var i = 0; i < node.length; i++) {
                   var child = node[i];
-                  if (isValidElement2(child)) {
+                  if (isValidElement3(child)) {
                     validateExplicitKey(child, parentType);
                   }
                 }
-              } else if (isValidElement2(node)) {
+              } else if (isValidElement3(node)) {
                 if (node._store) {
                   node._store.validated = true;
                 }
@@ -18276,7 +18276,7 @@
                     var iterator = iteratorFn.call(node);
                     var step;
                     while (!(step = iterator.next()).done) {
-                      if (isValidElement2(step.value)) {
+                      if (isValidElement3(step.value)) {
                         validateExplicitKey(step.value, parentType);
                       }
                     }
@@ -18423,8 +18423,8 @@
     }
   });
 
-  // extensions/add-gift-wrap/src/Checkout.jsx
-  var import_react11 = __toESM(require_react());
+  // extensions/employee-checker/src/Checkout.jsx
+  var import_react12 = __toESM(require_react());
 
   // node_modules/@remote-ui/rpc/build/esm/memory.mjs
   function isBasicObject(value) {
@@ -19124,8 +19124,8 @@
   // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/extension.mjs
   var extension = createExtensionRegistrationFunction();
 
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Checkbox/Checkbox.mjs
-  var Checkbox = createRemoteComponent("Checkbox");
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Banner/Banner.mjs
+  var Banner = createRemoteComponent("Banner");
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
   var import_react6 = __toESM(require_react(), 1);
@@ -19455,8 +19455,8 @@ ${errorInfo.componentStack}`);
     }
   };
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Checkbox/Checkbox.mjs
-  var Checkbox2 = createRemoteReactComponent(Checkbox);
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Banner/Banner.mjs
+  var Banner2 = createRemoteReactComponent(Banner);
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
   var import_react9 = __toESM(require_react(), 1);
@@ -19468,16 +19468,10 @@ ${errorInfo.componentStack}`);
       this.name = "CheckoutUIExtensionError";
     }
   };
-  var ExtensionHasNoMethodError = class extends Error {
-    constructor(method, target) {
-      super(`Cannot call '${method}()' on target '${target}'. The corresponding property was not found on the API.`);
-      this.name = "ExtensionHasNoMethodError";
-    }
-  };
-  var ExtensionHasNoTargetError = class extends Error {
-    constructor(method, target) {
-      super(`Cannot call '${method}()' on target '${target}'. Property 'target' is not found on api.`);
-      this.name = "ExtensionHasNoTargetError";
+  var ScopeNotGrantedError = class extends Error {
+    constructor(...args) {
+      super(...args);
+      this.name = "ScopeNotGrantedError";
     }
   };
 
@@ -19512,79 +19506,69 @@ ${errorInfo.componentStack}`);
     return subscription.current;
   }
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-lines.mjs
-  function useCartLines() {
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/buyer-identity.mjs
+  function useEmail() {
+    const buyerIdentity = useApi().buyerIdentity;
+    if (!buyerIdentity) {
+      throw new ScopeNotGrantedError("Using buyer identity requires having personal customer data permissions granted to your app.");
+    }
+    return useSubscription(buyerIdentity.email);
+  }
+
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/translate.mjs
+  var import_react11 = __toESM(require_react(), 1);
+  function useTranslate() {
     const {
-      lines
+      i18n
     } = useApi();
-    return useSubscription(lines);
-  }
-  function useApplyCartLinesChange() {
-    const api = useApi();
-    if ("applyCartLinesChange" in api) {
-      return api.applyCartLinesChange;
-    }
-    throw new ExtensionHasNoMethodError("applyCartLinesChange", api.extension.target);
-  }
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-line-target.mjs
-  function useCartLineTarget() {
-    const api = useApi();
-    if (!api.target) {
-      throw new ExtensionHasNoTargetError("useCartLineTarget", api.extension.target);
-    }
-    return useSubscription(api.target);
+    const translate = (0, import_react11.useCallback)((...args) => {
+      const translation = i18n.translate(...args);
+      if (!Array.isArray(translation)) {
+        return translation;
+      }
+      return translation.map((part, index) => {
+        if (/* @__PURE__ */ (0, import_react11.isValidElement)(part)) {
+          return /* @__PURE__ */ (0, import_react11.cloneElement)(part, {
+            key: index
+          });
+        }
+        return part;
+      });
+    }, [i18n]);
+    return translate;
   }
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/storage.mjs
-  function useStorage() {
-    return useApi().storage;
-  }
-
-  // extensions/add-gift-wrap/src/Checkout.jsx
+  // extensions/employee-checker/src/Checkout.jsx
   var import_jsx_runtime4 = __toESM(require_jsx_runtime());
-  var Checkout_default = reactExtension("purchase.checkout.cart-line-item.render-after", () => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Extension, {}));
+  var Checkout_default = reactExtension(
+    "purchase.checkout.block.render",
+    () => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Extension, {})
+  );
   function Extension() {
-    const { query, i18n } = useApi();
-    const applyCartLinesChange = useApplyCartLinesChange();
-    const [products, setProducts] = (0, import_react11.useState)();
-    const [loading, setLoading] = (0, import_react11.useState)(false);
-    const [checkbox_value, setcheckbox_value] = (0, import_react11.useState)(false);
-    const storeCheckbox = useStorage();
-    const merch = useCartLineTarget();
-    const productID = merch.merchandise.product.id;
-    const isProductChild = merch.lineComponents;
-    const lineIds = useCartLines();
-    (0, import_react11.useEffect)(() => {
+    const translate = useTranslate();
+    const { extension: extension2, query } = useApi();
+    const buyerEmail = useEmail();
+    const [loading, setLoading] = (0, import_react12.useState)(false);
+    (0, import_react12.useEffect)(() => {
       (() => __async(this, null, function* () {
-        yield fetchProducts(productID);
+        yield fetchProducts(buyerEmail);
       }))();
     }, []);
-    (0, import_react11.useEffect)(() => {
-      if (isProductChild.length >= 2)
-        setcheckbox_value(true);
-      console.log({ "LineIds": lineIds }, { "Products": products }, { "Merch": merch });
-    }, [lineIds, products, merch]);
     function fetchProducts(id) {
       return __async(this, null, function* () {
-        var _a, _b, _c;
         setLoading(true);
         try {
           const data = yield query(
             `{
-          product(id: "${id}") {
-            metafield(namespace:"custom",key: "is_gift_wrap_") {
-              value
-              key
-            }
-            title
-            description
+          customers(query: "muhammadmalik645@gmail.com") {
+            id
+            email
+            tags
           }
         }`
           );
-          if ((_c = (_b = (_a = data == null ? void 0 : data.data) == null ? void 0 : _a.product) == null ? void 0 : _b.metafield) == null ? void 0 : _c.value) {
-            setProducts(data.data.product);
-          }
+          console.clear();
+          console.log("CUSTOMERS", data);
         } catch (error) {
           console.error(error);
         } finally {
@@ -19592,60 +19576,6 @@ ${errorInfo.componentStack}`);
         }
       });
     }
-    function updateAttributes(id) {
-      return __async(this, null, function* () {
-        yield applyCartLinesChange({
-          type: "updateCartLine",
-          id,
-          attributes: [{
-            key: "_merger",
-            value: `${id}`
-          }]
-        });
-      });
-    }
-    function handleAddToCart(variantId, e) {
-      return __async(this, null, function* () {
-        var _a;
-        if (e == true) {
-          let lineID = lineIds.find((line) => {
-            if (line.merchandise.product.id === productID) {
-              return line;
-            }
-          });
-          setcheckbox_value(true);
-          if (isProductChild.length < 2) {
-            yield applyCartLinesChange({
-              type: "addCartLine",
-              merchandiseId: variantId,
-              quantity: 1,
-              attributes: [{
-                key: "_merger",
-                value: `${lineID.id}`
-              }]
-            });
-            yield updateAttributes(lineID.id);
-          }
-        } else if (e == false) {
-          let lineID = (_a = lineIds.find((line) => {
-            if (line.merchandise.id === variantId) {
-              return line;
-            }
-          })) == null ? void 0 : _a.id;
-          setcheckbox_value(false);
-          yield applyCartLinesChange({
-            type: "removeCartLine",
-            id: lineID,
-            quantity: 1
-          });
-        }
-      });
-    }
-    if (products) {
-      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Checkbox2, { name: "{products.title}", checked: checkbox_value, onChange: (e) => handleAddToCart(products.metafield.value, e), children: "Add Gift Wrap" });
-    } else {
-      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, {});
-    }
-    ;
+    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Banner2, { title: "employee-checker", children: translate("welcome", { target: extension2.target }) });
   }
 })();
