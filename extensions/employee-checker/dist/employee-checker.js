@@ -19507,12 +19507,12 @@ ${errorInfo.componentStack}`);
   }
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/buyer-identity.mjs
-  function useEmail() {
+  function useCustomer() {
     const buyerIdentity = useApi().buyerIdentity;
     if (!buyerIdentity) {
       throw new ScopeNotGrantedError("Using buyer identity requires having personal customer data permissions granted to your app.");
     }
-    return useSubscription(buyerIdentity.email);
+    return useSubscription(buyerIdentity.customer);
   }
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/translate.mjs
@@ -19547,27 +19547,24 @@ ${errorInfo.componentStack}`);
   function Extension() {
     const translate = useTranslate();
     const { extension: extension2, query } = useApi();
-    const buyerEmail = useEmail();
+    const { id } = useCustomer();
     const [loading, setLoading] = (0, import_react12.useState)(false);
     (0, import_react12.useEffect)(() => {
       (() => __async(this, null, function* () {
-        yield fetchProducts(buyerEmail);
+        yield fetchProducts(id);
       }))();
     }, []);
-    function fetchProducts(id) {
+    function fetchProducts(id2) {
       return __async(this, null, function* () {
         setLoading(true);
         try {
           const data = yield query(
             `{
-          customers(query: "muhammadmalik645@gmail.com") {
-            id
-            email
-            tags
+          customer(id: "${id2}") {            
+            tags           
           }
         }`
           );
-          console.clear();
           console.log("CUSTOMERS", data);
         } catch (error) {
           console.error(error);

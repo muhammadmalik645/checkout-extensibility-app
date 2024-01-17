@@ -5,6 +5,7 @@ import {
   useTranslate,
   reactExtension,
   useEmail,
+  useCustomer,
 } from '@shopify/ui-extensions-react/checkout';
 
 export default reactExtension(
@@ -15,29 +16,29 @@ export default reactExtension(
 function Extension() {
   const translate = useTranslate();
   const { extension,query } = useApi();
-  const buyerEmail = useEmail();
+  const { id } = useCustomer();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
-      await fetchProducts(buyerEmail);
+      await fetchProducts(id);
       
     })();
   }, []);
+
+
 
   async function fetchProducts(id) {
     setLoading(true);
     try {
       const data = await query(
         `{
-          customers(query: "muhammadmalik645@gmail.com") {
-            id
-            email
-            tags
+          customer(id: "${id}") {            
+            tags           
           }
         }`
       );
-      console.clear()
+      //console.clear()
       console.log('CUSTOMERS',data)      
       
 
