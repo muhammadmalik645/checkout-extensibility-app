@@ -3,6 +3,8 @@ import {
   useApi,
   useTranslate,
   reactExtension,
+  useApplyDiscountCodeChange,
+  useDiscountCodes,
 } from '@shopify/ui-extensions-react/checkout';
 
 export default reactExtension(
@@ -13,10 +15,26 @@ export default reactExtension(
 function Extension() {
   const translate = useTranslate();
   const { extension } = useApi();
+  const discountChange = useApplyDiscountCodeChange()
+  const appliedDiscountCodes = useDiscountCodes()
 
-  return (
-    <Banner title="prevent-free-shipping">
-      {translate('welcome', {target: extension.target})}
-    </Banner>
-  );
+  console.log('appliedDiscountCodes', appliedDiscountCodes)
+
+  const discountRemover = async (codeToRemove) => {
+    await discountChange({
+      type: 'removeDiscountCode',
+      code: codeToRemove
+    })
+  }
+
+  appliedDiscountCodes.forEach((discountCode)=>{
+    if(discountCode.code == 'SHIPFREE'){
+      discountRemover(discountCode.code)
+      return (
+        <Banner title='Alert'>
+          You can't add {discountCode.code} with these products
+        </Banner>
+      )
+    }
+  })
 }
