@@ -17108,4 +17108,3 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     return `$${amount}`;
   }
 })();
-//# sourceMappingURL=post-purchase-upsell.js.map

@@ -19584,4 +19584,3 @@ ${errorInfo.componentStack}`);
     return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Banner2, { title: titleBanner, status, collapsible, children: productMetafield });
   }
 })();
-//# sourceMappingURL=product-features.js.map

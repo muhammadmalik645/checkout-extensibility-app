@@ -19576,4 +19576,3 @@ ${errorInfo.componentStack}`);
     return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Banner2, { title: "employee-checker", children: translate("welcome", { target: extension2.target }) });
   }
 })();
-//# sourceMappingURL=employee-checker.js.map
