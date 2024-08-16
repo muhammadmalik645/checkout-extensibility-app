@@ -18424,7 +18424,7 @@
   });
 
   // extensions/upsell-popup/src/Checkout.jsx
-  var import_react26 = __toESM(require_react());
+  var import_react29 = __toESM(require_react());
 
   // node_modules/@remote-ui/rpc/build/esm/memory.mjs
   function isBasicObject(value) {
@@ -19090,7 +19090,7 @@
     return [hasChanged ? normalizedNewValue : IGNORE, hotSwaps];
   }
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/utilities/registration.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/utilities/registration.mjs
   function createExtensionRegistrationFunction() {
     const extensionWrapper = (target, implementation) => {
       var _shopify;
@@ -19121,58 +19121,67 @@
     return extensionWrapper;
   }
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/extension.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/extension.mjs
   var extension = createExtensionRegistrationFunction();
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Banner/Banner.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Badge/Badge.mjs
+  var Badge = createRemoteComponent("Badge");
+
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Banner/Banner.mjs
   var Banner = createRemoteComponent("Banner");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/BlockLayout/BlockLayout.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/BlockLayout/BlockLayout.mjs
   var BlockLayout = createRemoteComponent("BlockLayout");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/BlockSpacer/BlockSpacer.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/BlockSpacer/BlockSpacer.mjs
   var BlockSpacer = createRemoteComponent("BlockSpacer");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/BlockStack/BlockStack.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/BlockStack/BlockStack.mjs
   var BlockStack = createRemoteComponent("BlockStack");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Button/Button.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Button/Button.mjs
   var Button = createRemoteComponent("Button");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Disclosure/Disclosure.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Disclosure/Disclosure.mjs
   var Disclosure = createRemoteComponent("Disclosure");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Divider/Divider.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Divider/Divider.mjs
   var Divider = createRemoteComponent("Divider");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Heading/Heading.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Heading/Heading.mjs
   var Heading = createRemoteComponent("Heading");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Image/Image.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Icon/Icon.mjs
+  var Icon = createRemoteComponent("Icon");
+
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Image/Image.mjs
   var Image = createRemoteComponent("Image");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/InlineLayout/InlineLayout.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/InlineLayout/InlineLayout.mjs
   var InlineLayout = createRemoteComponent("InlineLayout");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/InlineStack/InlineStack.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/InlineStack/InlineStack.mjs
   var InlineStack = createRemoteComponent("InlineStack");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Link/Link.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/InlineSpacer/InlineSpacer.mjs
+  var InlineSpacer = createRemoteComponent("InlineSpacer");
+
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Link/Link.mjs
   var Link = createRemoteComponent("Link");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Modal/Modal.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Modal/Modal.mjs
   var Modal = createRemoteComponent("Modal");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Pressable/Pressable.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Pressable/Pressable.mjs
   var Pressable = createRemoteComponent("Pressable");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Text/Text.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Text/Text.mjs
   var Text = createRemoteComponent("Text");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/View/View.mjs
+  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/View/View.mjs
   var View = createRemoteComponent("View");
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
   var import_react6 = __toESM(require_react(), 1);
 
   // node_modules/@remote-ui/react/build/esm/render.mjs
@@ -19447,11 +19456,11 @@
     });
   }
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/context.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/context.mjs
   var import_react5 = __toESM(require_react(), 1);
   var ExtensionApiContext = /* @__PURE__ */ (0, import_react5.createContext)(null);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
   var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
   function reactExtension(target, render3) {
     return extension(target, (root, api) => __async(this, null, function* () {
@@ -19500,64 +19509,73 @@ ${errorInfo.componentStack}`);
     }
   };
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Banner/Banner.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Badge/Badge.mjs
+  var Badge2 = createRemoteReactComponent(Badge);
+
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Banner/Banner.mjs
   var Banner2 = createRemoteReactComponent(Banner);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/BlockLayout/BlockLayout.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/BlockLayout/BlockLayout.mjs
   var BlockLayout2 = createRemoteReactComponent(BlockLayout);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/BlockSpacer/BlockSpacer.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/BlockSpacer/BlockSpacer.mjs
   var BlockSpacer2 = createRemoteReactComponent(BlockSpacer);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/BlockStack/BlockStack.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/BlockStack/BlockStack.mjs
   var BlockStack2 = createRemoteReactComponent(BlockStack);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Button/Button.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Button/Button.mjs
   var Button2 = createRemoteReactComponent(Button, {
     fragmentProps: ["overlay"]
   });
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Disclosure/Disclosure.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Disclosure/Disclosure.mjs
   var Disclosure2 = createRemoteReactComponent(Disclosure);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Divider/Divider.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Divider/Divider.mjs
   var Divider2 = createRemoteReactComponent(Divider);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Heading/Heading.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Heading/Heading.mjs
   var Heading2 = createRemoteReactComponent(Heading);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Image/Image.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Icon/Icon.mjs
+  var Icon2 = createRemoteReactComponent(Icon);
+
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Image/Image.mjs
   var Image2 = createRemoteReactComponent(Image);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/InlineLayout/InlineLayout.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/InlineLayout/InlineLayout.mjs
   var InlineLayout2 = createRemoteReactComponent(InlineLayout);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/InlineStack/InlineStack.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/InlineStack/InlineStack.mjs
   var InlineStack2 = createRemoteReactComponent(InlineStack);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Link/Link.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/InlineSpacer/InlineSpacer.mjs
+  var InlineSpacer2 = createRemoteReactComponent(InlineSpacer);
+
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Link/Link.mjs
   var Link2 = createRemoteReactComponent(Link, {
     fragmentProps: ["overlay"]
   });
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Modal/Modal.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Modal/Modal.mjs
   var Modal2 = createRemoteReactComponent(Modal);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Pressable/Pressable.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Pressable/Pressable.mjs
   var Pressable2 = createRemoteReactComponent(Pressable, {
     fragmentProps: ["overlay"]
   });
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Text/Text.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Text/Text.mjs
   var Text2 = createRemoteReactComponent(Text);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/View/View.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/View/View.mjs
   var View2 = createRemoteReactComponent(View);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
-  var import_react24 = __toESM(require_react(), 1);
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
+  var import_react27 = __toESM(require_react(), 1);
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/errors.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/errors.mjs
   var CheckoutUIExtensionError = class extends Error {
     constructor(...args) {
       super(...args);
@@ -19571,20 +19589,20 @@ ${errorInfo.componentStack}`);
     }
   };
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
   function useApi(_target) {
-    const api = (0, import_react24.useContext)(ExtensionApiContext);
+    const api = (0, import_react27.useContext)(ExtensionApiContext);
     if (api == null) {
-      throw new CheckoutUIExtensionError("You can only call this hook when running as a UI extension.");
+      throw new CheckoutUIExtensionError("You can only call this hook when running as a checkout UI extension.");
     }
     return api;
   }
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/subscription.mjs
-  var import_react25 = __toESM(require_react(), 1);
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/subscription.mjs
+  var import_react28 = __toESM(require_react(), 1);
   function useSubscription(subscription) {
-    const [, setValue] = (0, import_react25.useState)(subscription.current);
-    (0, import_react25.useEffect)(() => {
+    const [, setValue] = (0, import_react28.useState)(subscription.current);
+    (0, import_react28.useEffect)(() => {
       let didUnsubscribe = false;
       const checkForUpdates = (newValue) => {
         if (didUnsubscribe) {
@@ -19602,7 +19620,7 @@ ${errorInfo.componentStack}`);
     return subscription.current;
   }
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-lines.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-lines.mjs
   function useCartLines() {
     const {
       lines
@@ -19617,7 +19635,7 @@ ${errorInfo.componentStack}`);
     throw new ExtensionHasNoMethodError("applyCartLinesChange", api.extension.target);
   }
 
-  // extensions/upsell-popup/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/settings.mjs
+  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/settings.mjs
   function useSettings() {
     const settings = useSubscription(useApi().settings);
     return settings;
@@ -19629,15 +19647,15 @@ ${errorInfo.componentStack}`);
   function App() {
     const { query, i18n, ui: ui2 } = useApi();
     const applyCartLinesChange = useApplyCartLinesChange();
-    const [products, setProducts] = (0, import_react26.useState)([]);
-    const [loading, setLoading] = (0, import_react26.useState)(false);
-    const [adding, setAdding] = (0, import_react26.useState)(false);
-    const [showError, setShowError] = (0, import_react26.useState)(false);
+    const [products, setProducts] = (0, import_react29.useState)([]);
+    const [loading, setLoading] = (0, import_react29.useState)(false);
+    const [adding, setAdding] = (0, import_react29.useState)(false);
+    const [showError, setShowError] = (0, import_react29.useState)(false);
     const lines = useCartLines();
-    (0, import_react26.useEffect)(() => {
+    (0, import_react29.useEffect)(() => {
       fetchProducts();
     }, []);
-    (0, import_react26.useEffect)(() => {
+    (0, import_react29.useEffect)(() => {
       if (showError) {
         const timer = setTimeout(() => setShowError(false), 3e3);
         return () => clearTimeout(timer);
@@ -19736,10 +19754,12 @@ ${errorInfo.componentStack}`);
     });
   }
   function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
-    const [selectedVariant, setSelectedVariant] = (0, import_react26.useState)(null);
-    const [isPressed, setIsPressed] = (0, import_react26.useState)("transparent");
+    const [selectedVariant, setSelectedVariant] = (0, import_react29.useState)(null);
+    const [isPressed, setIsPressed] = (0, import_react29.useState)("transparent");
     const { discount_amount: discountAmount } = useSettings();
     const discount = discountAmount != null ? discountAmount : 10;
+    const [chevronState, setChevronState] = (0, import_react29.useState)(false);
+    const [activeState, setActiveState] = (0, import_react29.useState)(null);
     return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
       Link2,
       {
@@ -19751,7 +19771,6 @@ ${errorInfo.componentStack}`);
               const { images, title, variants, vendor } = product;
               console.log("variants", variants.nodes);
               const availableVariants = variants.nodes;
-              const renderPrice = i18n.formatCurrency(variants.nodes[0].price.amount);
               const imageUrl = (_b = (_a = images.nodes[0]) == null ? void 0 : _a.url) != null ? _b : "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_medium.png?format=webp&v=1530129081";
               return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(BlockStack2, { spacing: "loose", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(Disclosure2, { children: [
                 /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(InlineLayout2, { spacing: "base", columns: [64, "fill", "auto"], blockAlignment: "center", children: [
@@ -19768,9 +19787,30 @@ ${errorInfo.componentStack}`);
                   ),
                   /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(BlockStack2, { spacing: "none", children: [
                     /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Text2, { size: "medium", emphasis: "strong", children: title }),
-                    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Text2, { appearance: "subdued", children: renderPrice })
+                    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(BlockSpacer2, { spacing: "extraTight" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(InlineLayout2, { columns: [64], children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(Badge2, { size: "small", tone: "critical", children: [
+                      discount,
+                      "% off"
+                    ] }) })
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button2, { inlineAlignment: "start", toggles: title, kind: "plain", children: "View" })
+                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                    Button2,
+                    {
+                      onPress: () => {
+                        setActiveState(product.title);
+                        setChevronState(!chevronState);
+                      },
+                      inlineAlignment: "start",
+                      toggles: title,
+                      kind: "plain",
+                      children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                        Icon2,
+                        {
+                          source: chevronState && product.title == activeState ? "chevronUp" : "chevronDown"
+                        }
+                      )
+                    }
+                  )
                 ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(View2, { id: title, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(InlineLayout2, { columns: ["40%", "fill"], children: [
                   /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(View2, { border: "none", padding: "base", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
@@ -19812,8 +19852,26 @@ ${errorInfo.componentStack}`);
                             }
                           );
                         }) }) }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, {}),
-                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(View2, { border: "none", padding: "base", children: selectedVariant && product.id == selectedVariant.product.id ? selectedVariant.price.amount - selectedVariant.price.amount * (discount / 100) : availableVariants[0].price.amount - availableVariants[0].price.amount * (discount / 100) }),
-                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button2, { loading: adding, onPress: () => handleAddToCart(selectedVariant.id, discount), children: "Add Product" })
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(View2, { border: "none", padding: "base", children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Text2, { accessibilityRole: "deletion", children: selectedVariant && product.id == selectedVariant.product.id ? i18n.formatCurrency(selectedVariant.price.amount) : i18n.formatCurrency(availableVariants[0].price.amount) }),
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(InlineSpacer2, { spacing: "extraTight" }),
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Text2, { emphasis: "bold", children: selectedVariant && product.id == selectedVariant.product.id ? i18n.formatCurrency(
+                            selectedVariant.price.amount - selectedVariant.price.amount * (discount / 100)
+                          ) : i18n.formatCurrency(
+                            availableVariants[0].price.amount - availableVariants[0].price.amount * (discount / 100)
+                          ) })
+                        ] }),
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                          Button2,
+                          {
+                            loading: (!selectedVariant && !availableVariants.length > 1 ? adding : false) || (product.id == (selectedVariant == null ? void 0 : selectedVariant.product.id) ? adding : false),
+                            onPress: () => handleAddToCart(
+                              selectedVariant ? selectedVariant.id : availableVariants[0].id,
+                              discount
+                            ),
+                            children: "Add Product"
+                          }
+                        )
                       ]
                     }
                   ) })

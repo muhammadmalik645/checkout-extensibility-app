@@ -24,6 +24,9 @@ import {
   InlineStack,
   Pressable,
   useSettings,
+  Badge,
+  InlineSpacer,
+  Icon,
 } from '@shopify/ui-extensions-react/checkout';
 //import { InlineStack } from '@shopify/ui-extensions/checkout';
 // Set up the entry point for the extension
@@ -172,6 +175,8 @@ function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
   const [isPressed, setIsPressed] = useState('transparent');
   const { discount_amount: discountAmount } = useSettings();
   const discount = discountAmount ?? 10;
+  const [chevronState, setChevronState] = useState(false);
+  const [activeState, setActiveState] = useState(null);
   // const updateVariant = (variant) => {
   //   setSelectedVariant(variant);
   // };
@@ -186,7 +191,6 @@ function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
               const { images, title, variants, vendor } = product;
               console.log('variants', variants.nodes);
               const availableVariants = variants.nodes;
-              const renderPrice = i18n.formatCurrency(variants.nodes[0].price.amount);
               const imageUrl =
                 images.nodes[0]?.url ??
                 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_medium.png?format=webp&v=1530129081';
@@ -206,11 +210,27 @@ function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
                         <Text size="medium" emphasis="strong">
                           {title}
                         </Text>
-                        <Text appearance="subdued">{renderPrice}</Text>
+                        {/* <Text appearance="subdued">{renderPrice}</Text> */}
+                        <BlockSpacer spacing="extraTight" />
+                        <InlineLayout columns={[64]}>
+                          <Badge size="small" tone="critical">
+                            {discount}% off
+                          </Badge>
+                        </InlineLayout>
                       </BlockStack>
 
-                      <Button inlineAlignment="start" toggles={title} kind="plain">
-                        View
+                      <Button
+                        onPress={() => {
+                          setActiveState(product.title);
+                          setChevronState(!chevronState);
+                        }}
+                        inlineAlignment="start"
+                        toggles={title}
+                        kind="plain"
+                      >
+                        <Icon
+                          source={chevronState && product.title == activeState ? 'chevronUp' : 'chevronDown'}
+                        ></Icon>
                       </Button>
                     </InlineLayout>
                     <View id={title}>
@@ -267,12 +287,35 @@ function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
                             )}
 
                             <View border="none" padding="base">
-                              {selectedVariant && product.id == selectedVariant.product.id
-                                ? selectedVariant.price.amount - selectedVariant.price.amount * (discount / 100)
-                                : availableVariants[0].price.amount -
-                                  availableVariants[0].price.amount * (discount / 100)}
+                              <Text accessibilityRole="deletion">
+                                {selectedVariant && product.id == selectedVariant.product.id
+                                  ? i18n.formatCurrency(selectedVariant.price.amount)
+                                  : i18n.formatCurrency(availableVariants[0].price.amount)}
+                              </Text>
+                              <InlineSpacer spacing="extraTight" />
+                              <Text emphasis="bold">
+                                {selectedVariant && product.id == selectedVariant.product.id
+                                  ? i18n.formatCurrency(
+                                      selectedVariant.price.amount - selectedVariant.price.amount * (discount / 100)
+                                    )
+                                  : i18n.formatCurrency(
+                                      availableVariants[0].price.amount -
+                                        availableVariants[0].price.amount * (discount / 100)
+                                    )}
+                              </Text>
                             </View>
-                            <Button loading={adding} onPress={() => handleAddToCart(selectedVariant.id, discount)}>
+                            <Button
+                              loading={
+                                (!selectedVariant && !availableVariants.length > 1 ? adding : false) ||
+                                (product.id == selectedVariant?.product.id ? adding : false)
+                              }
+                              onPress={() =>
+                                handleAddToCart(
+                                  selectedVariant ? selectedVariant.id : availableVariants[0].id,
+                                  discount
+                                )
+                              }
+                            >
                               Add Product
                             </Button>
                           </BlockLayout>
