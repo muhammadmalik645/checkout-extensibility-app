@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Banner,
   Text,
@@ -17,11 +17,10 @@ import {
   useAttributeValues,
 } from '@shopify/ui-extensions-react/checkout';
 
-
 // const checkoutBlock = reactExtension('purchase.checkout.block.render',() => <Extension/>)
 // export { checkoutBlock }
 
-export default reactExtension('purchase.checkout.cart-line-item.render-after', ()=> <Extension/>)
+export default reactExtension('purchase.checkout.cart-line-item.render-after', () => <Extension />);
 
 function Extension() {
   const { query, i18n } = useApi();
@@ -29,26 +28,26 @@ function Extension() {
   const [products, setProducts] = useState();
   const [loading, setLoading] = useState(false);
   const [checkbox_value, setcheckbox_value] = useState(false);
-  const storeCheckbox = useStorage()
+  const storeCheckbox = useStorage();
   //const [merger] = useAttributeValues(["_merger"])
   const merch = useCartLineTarget();
-  const productID = merch.merchandise.product.id
-  const isProductChild = merch.lineComponents
+  const productID = merch.merchandise.product.id;
+  const isProductChild = merch.lineComponents;
   const lineIds = useCartLines();
 
   useEffect(() => {
     (async () => {
       await fetchProducts(productID);
-      
     })();
   }, []);
 
   useEffect(() => {
-    if(isProductChild.length >= 2) setcheckbox_value(true); 
-    console.log({'LineIds':lineIds},{'Products': products}, {'Merch': merch})
-  }, [lineIds, products ,merch]);
+    if (isProductChild.length >= 2) setcheckbox_value(true);
+    console.log({ LineIds: lineIds }, { Products: products }, { Merch: merch });
+  }, [lineIds, products, merch]);
 
   async function fetchProducts(id) {
+    console.log('iddddddddd', id);
     setLoading(true);
     try {
       const data = await query(
@@ -60,74 +59,80 @@ function Extension() {
             }
             title
             description
+            collections(first: 100) {
+              edges {
+                node {
+                  title
+                }
+              }
+            }
           }
         }`
       );
       //addProduct(data.data.product.metafield.value)
-      if(data?.data?.product?.metafield?.value){
-        setProducts(data.data.product);
-      }    
-      
-      
-
+      //if(data?.data?.product?.metafield?.value){
+      setProducts(data.data.product);
+      //}
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
   }
+  console.log('products hereeeeeee', products);
 
-  async function updateAttributes(id){
+  async function updateAttributes(id) {
     // console.log('ID of Parent Product', id)
     await applyCartLinesChange({
       type: 'updateCartLine',
       id: id,
-      attributes: [{
-        key: '_merger',
-        value: `${id}`,
-      }]
+      attributes: [
+        {
+          key: '_merger',
+          value: `${id}`,
+        },
+      ],
     });
   }
 
   async function handleAddToCart(variantId, e) {
     //console.log(variantId, e)
-    if(e == true){
-     
-      let lineID = lineIds.find((line)=> {
+    if (e == true) {
+      let lineID = lineIds.find((line) => {
         //console.log({'LINE ID':line.merchandise.product.id})
-        if(line.merchandise.product.id === productID){
-          return line
+        if (line.merchandise.product.id === productID) {
+          return line;
         }
-      })
-      
+      });
+
       // setcheckbox_value(true,()=>{
       //   saveCheckboxValue();
       // })
-      setcheckbox_value(true)
-      if(isProductChild.length < 2){
+      setcheckbox_value(true);
+      if (isProductChild.length < 2) {
         await applyCartLinesChange({
           type: 'addCartLine',
           merchandiseId: variantId,
           quantity: 1,
-          attributes: [{
-            key: '_merger',
-            value: `${lineID.id}`,
-          }]
-        });     
+          attributes: [
+            {
+              key: '_merger',
+              value: `${lineID.id}`,
+            },
+          ],
+        });
 
         //console.log({'ATTRIBUTE UPDATED': lineID},{'EXISTING LINE IDS': lineIds},{'PRODUCT ID': productID})
-        await updateAttributes(lineID.id)
+        await updateAttributes(lineID.id);
         // console.log('lineIds HERE',lineIds)
       }
-    }
-    else if(e == false){
-      
-      let lineID = lineIds.find((line)=> {
+    } else if (e == false) {
+      let lineID = lineIds.find((line) => {
         // console.log(line.merchandise.id === variantId)
-        if(line.merchandise.id === variantId){
-          return line
+        if (line.merchandise.id === variantId) {
+          return line;
         }
-      })?.id
+      })?.id;
       // console.log('child IDs ', lineIds[0].lineComponents[1].id)
       // const merchID = merch.merchandise.id
       // const merchQty = merch.quantity
@@ -138,35 +143,34 @@ function Extension() {
       // setcheckbox_value(false,()=>{
       //   saveCheckboxValue();
       // })
-      setcheckbox_value(false)
+      setcheckbox_value(false);
 
-      
-
-       await applyCartLinesChange({
-         type: 'removeCartLine',
-         id: lineID,
-         quantity: 1,
-       });
+      await applyCartLinesChange({
+        type: 'removeCartLine',
+        id: lineID,
+        quantity: 1,
+      });
       //  await applyCartLinesChange({
       //   type: 'addCartLine',
       //   id: merchID,
       //   quantity: merchQty,
       // });
       // console.log(merch)
-      // console.log('DELETING')      
-    }  
-    
+      // console.log('DELETING')
+    }
   }
 
-  if(products){
-    return(
-      <Checkbox name="{products.title}" checked={checkbox_value} onChange={(e) => handleAddToCart(products.metafield.value, e)}>
+  if (products) {
+    return (
+      <Checkbox
+        name="{products.title}"
+        checked={checkbox_value}
+        onChange={(e) => handleAddToCart(products.metafield.value, e)}
+      >
         Add Gift Wrap
       </Checkbox>
-    )
+    );
+  } else {
+    return <></>;
   }
-  else
-  {return (
-    <></>
-  )};
 }

@@ -19563,11 +19563,11 @@ ${errorInfo.componentStack}`);
     (0, import_react11.useEffect)(() => {
       if (isProductChild.length >= 2)
         setcheckbox_value(true);
-      console.log({ "LineIds": lineIds }, { "Products": products }, { "Merch": merch });
+      console.log({ LineIds: lineIds }, { Products: products }, { Merch: merch });
     }, [lineIds, products, merch]);
     function fetchProducts(id) {
       return __async(this, null, function* () {
-        var _a, _b, _c;
+        console.log("iddddddddd", id);
         setLoading(true);
         try {
           const data = yield query(
@@ -19579,12 +19579,17 @@ ${errorInfo.componentStack}`);
             }
             title
             description
+            collections(first: 100) {
+              edges {
+                node {
+                  title
+                }
+              }
+            }
           }
         }`
           );
-          if ((_c = (_b = (_a = data == null ? void 0 : data.data) == null ? void 0 : _a.product) == null ? void 0 : _b.metafield) == null ? void 0 : _c.value) {
-            setProducts(data.data.product);
-          }
+          setProducts(data.data.product);
         } catch (error) {
           console.error(error);
         } finally {
@@ -19592,15 +19597,18 @@ ${errorInfo.componentStack}`);
         }
       });
     }
+    console.log("products hereeeeeee", products);
     function updateAttributes(id) {
       return __async(this, null, function* () {
         yield applyCartLinesChange({
           type: "updateCartLine",
           id,
-          attributes: [{
-            key: "_merger",
-            value: `${id}`
-          }]
+          attributes: [
+            {
+              key: "_merger",
+              value: `${id}`
+            }
+          ]
         });
       });
     }
@@ -19619,10 +19627,12 @@ ${errorInfo.componentStack}`);
               type: "addCartLine",
               merchandiseId: variantId,
               quantity: 1,
-              attributes: [{
-                key: "_merger",
-                value: `${lineID.id}`
-              }]
+              attributes: [
+                {
+                  key: "_merger",
+                  value: `${lineID.id}`
+                }
+              ]
             });
             yield updateAttributes(lineID.id);
           }
@@ -19642,10 +19652,18 @@ ${errorInfo.componentStack}`);
       });
     }
     if (products) {
-      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Checkbox2, { name: "{products.title}", checked: checkbox_value, onChange: (e) => handleAddToCart(products.metafield.value, e), children: "Add Gift Wrap" });
+      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+        Checkbox2,
+        {
+          name: "{products.title}",
+          checked: checkbox_value,
+          onChange: (e) => handleAddToCart(products.metafield.value, e),
+          children: "Add Gift Wrap"
+        }
+      );
     } else {
       return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, {});
     }
-    ;
   }
 })();
+//# sourceMappingURL=add-gift-wrap.js.map
