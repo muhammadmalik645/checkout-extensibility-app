@@ -3,6 +3,14 @@ query RunInput {
     lines {
       id
       quantity
+      cost {
+        totalAmount{
+          amount
+        }
+      }
+      discount: attribute(key:"discountAdd"){
+        value
+      }
     }
   }
 }

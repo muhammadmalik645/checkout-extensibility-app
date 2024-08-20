@@ -182,7 +182,7 @@ function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
   // };
 
   return (
-    <Link
+    <Button
       overlay={
         <Modal id="my-modal" padding title="Buy This as well">
           <BlockStack spacing="loose">
@@ -309,12 +309,13 @@ function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
                                 (!selectedVariant && !availableVariants.length > 1 ? adding : false) ||
                                 (product.id == selectedVariant?.product.id ? adding : false)
                               }
-                              onPress={() =>
+                              onPress={() => {
                                 handleAddToCart(
                                   selectedVariant ? selectedVariant.id : availableVariants[0].id,
                                   discount
-                                )
-                              }
+                                );
+                                setSelectedVariant(null);
+                              }}
                             >
                               Add Product
                             </Button>
@@ -336,8 +337,8 @@ function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
         </Modal>
       }
     >
-      You may also Like
-    </Link>
+      View more Products
+    </Button>
   );
 }
 

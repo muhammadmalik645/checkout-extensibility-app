@@ -1,0 +1,28 @@
+{
+    "cart": {
+        "lines": [
+            {
+                "id": "gid://shopify/CartLine/70880a1e-5aa6-4fd0-b288-4ae40f8bc0d5",
+                "quantity": 1,
+                "cost": {
+                    "totalAmount": {
+                        "amount": "885.95"
+                    }
+                },
+                "discount": null
+            },
+            {
+                "id": "gid://shopify/CartLine/93aa6c2c-bd07-4410-a57f-7190fc21bda3",
+                "quantity": 1,
+                "cost": {
+                    "totalAmount": {
+                        "amount": "699.95"
+                    }
+                },
+                "discount": {
+                    "value": "10"
+                }
+            }
+        ]
+    }
+}

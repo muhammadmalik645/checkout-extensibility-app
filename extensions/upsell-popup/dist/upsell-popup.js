@@ -18424,7 +18424,7 @@
   });
 
   // extensions/upsell-popup/src/Checkout.jsx
-  var import_react29 = __toESM(require_react());
+  var import_react28 = __toESM(require_react());
 
   // node_modules/@remote-ui/rpc/build/esm/memory.mjs
   function isBasicObject(value) {
@@ -19166,9 +19166,6 @@
   // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/InlineSpacer/InlineSpacer.mjs
   var InlineSpacer = createRemoteComponent("InlineSpacer");
 
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Link/Link.mjs
-  var Link = createRemoteComponent("Link");
-
   // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Modal/Modal.mjs
   var Modal = createRemoteComponent("Modal");
 
@@ -19553,11 +19550,6 @@ ${errorInfo.componentStack}`);
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/InlineSpacer/InlineSpacer.mjs
   var InlineSpacer2 = createRemoteReactComponent(InlineSpacer);
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Link/Link.mjs
-  var Link2 = createRemoteReactComponent(Link, {
-    fragmentProps: ["overlay"]
-  });
-
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Modal/Modal.mjs
   var Modal2 = createRemoteReactComponent(Modal);
 
@@ -19573,7 +19565,7 @@ ${errorInfo.componentStack}`);
   var View2 = createRemoteReactComponent(View);
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
-  var import_react27 = __toESM(require_react(), 1);
+  var import_react26 = __toESM(require_react(), 1);
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/errors.mjs
   var CheckoutUIExtensionError = class extends Error {
@@ -19591,7 +19583,7 @@ ${errorInfo.componentStack}`);
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
   function useApi(_target) {
-    const api = (0, import_react27.useContext)(ExtensionApiContext);
+    const api = (0, import_react26.useContext)(ExtensionApiContext);
     if (api == null) {
       throw new CheckoutUIExtensionError("You can only call this hook when running as a checkout UI extension.");
     }
@@ -19599,10 +19591,10 @@ ${errorInfo.componentStack}`);
   }
 
   // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/subscription.mjs
-  var import_react28 = __toESM(require_react(), 1);
+  var import_react27 = __toESM(require_react(), 1);
   function useSubscription(subscription) {
-    const [, setValue] = (0, import_react28.useState)(subscription.current);
-    (0, import_react28.useEffect)(() => {
+    const [, setValue] = (0, import_react27.useState)(subscription.current);
+    (0, import_react27.useEffect)(() => {
       let didUnsubscribe = false;
       const checkForUpdates = (newValue) => {
         if (didUnsubscribe) {
@@ -19647,15 +19639,15 @@ ${errorInfo.componentStack}`);
   function App() {
     const { query, i18n, ui: ui2 } = useApi();
     const applyCartLinesChange = useApplyCartLinesChange();
-    const [products, setProducts] = (0, import_react29.useState)([]);
-    const [loading, setLoading] = (0, import_react29.useState)(false);
-    const [adding, setAdding] = (0, import_react29.useState)(false);
-    const [showError, setShowError] = (0, import_react29.useState)(false);
+    const [products, setProducts] = (0, import_react28.useState)([]);
+    const [loading, setLoading] = (0, import_react28.useState)(false);
+    const [adding, setAdding] = (0, import_react28.useState)(false);
+    const [showError, setShowError] = (0, import_react28.useState)(false);
     const lines = useCartLines();
-    (0, import_react29.useEffect)(() => {
+    (0, import_react28.useEffect)(() => {
       fetchProducts();
     }, []);
-    (0, import_react29.useEffect)(() => {
+    (0, import_react28.useEffect)(() => {
       if (showError) {
         const timer = setTimeout(() => setShowError(false), 3e3);
         return () => clearTimeout(timer);
@@ -19754,14 +19746,14 @@ ${errorInfo.componentStack}`);
     });
   }
   function ProductOffer({ products, i18n, adding, handleAddToCart, showError }) {
-    const [selectedVariant, setSelectedVariant] = (0, import_react29.useState)(null);
-    const [isPressed, setIsPressed] = (0, import_react29.useState)("transparent");
+    const [selectedVariant, setSelectedVariant] = (0, import_react28.useState)(null);
+    const [isPressed, setIsPressed] = (0, import_react28.useState)("transparent");
     const { discount_amount: discountAmount } = useSettings();
     const discount = discountAmount != null ? discountAmount : 10;
-    const [chevronState, setChevronState] = (0, import_react29.useState)(false);
-    const [activeState, setActiveState] = (0, import_react29.useState)(null);
+    const [chevronState, setChevronState] = (0, import_react28.useState)(false);
+    const [activeState, setActiveState] = (0, import_react28.useState)(null);
     return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-      Link2,
+      Button2,
       {
         overlay: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(Modal2, { id: "my-modal", padding: true, title: "Buy This as well", children: [
           /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(BlockStack2, { spacing: "loose", children: [
@@ -19865,10 +19857,13 @@ ${errorInfo.componentStack}`);
                           Button2,
                           {
                             loading: (!selectedVariant && !availableVariants.length > 1 ? adding : false) || (product.id == (selectedVariant == null ? void 0 : selectedVariant.product.id) ? adding : false),
-                            onPress: () => handleAddToCart(
-                              selectedVariant ? selectedVariant.id : availableVariants[0].id,
-                              discount
-                            ),
+                            onPress: () => {
+                              handleAddToCart(
+                                selectedVariant ? selectedVariant.id : availableVariants[0].id,
+                                discount
+                              );
+                              setSelectedVariant(null);
+                            },
                             children: "Add Product"
                           }
                         )
@@ -19883,7 +19878,7 @@ ${errorInfo.componentStack}`);
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(BlockSpacer2, { spacing: "loose" }),
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(BlockStack2, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button2, { onPress: () => ui.overlay.close("my-modal"), children: "Close" }) })
         ] }),
-        children: "You may also Like"
+        children: "View more Products"
       }
     );
   }
@@ -19891,3 +19886,4 @@ ${errorInfo.componentStack}`);
     return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Banner2, { status: "critical", children: "There was an issue adding this product. Please try again." });
   }
 })();
+//# sourceMappingURL=upsell-popup.js.map
