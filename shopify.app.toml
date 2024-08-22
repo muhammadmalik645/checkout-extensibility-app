@@ -1,13 +1,16 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-name = "checkout-extensibility app"
 client_id = "86d3c8d1c0aa402566c9a3b62559ca26"
+name = "checkout-extensibility app"
 application_url = "https://shopify.dev/apps/default-app-home"
 embedded = true
 
+[build]
+dev_store_url = "malik-checkout-test.myshopify.com"
+
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_cart_transforms, write_products, write_discounts, read_cart_transforms, read_orders,customer_read_customers,unauthenticated_read_customers,unauthenticated_read_customer_tags,read_customers"
+scopes = "customer_read_customers,read_cart_transforms,read_customers,read_orders,unauthenticated_read_customer_tags,unauthenticated_read_customers,write_cart_transforms,write_discounts,write_products"
 
 [auth]
 redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
@@ -17,6 +20,3 @@ api_version = "2023-10"
 
 [pos]
 embedded = false
-
-[build]
-dev_store_url = "malik-checkout-test.myshopify.com"
