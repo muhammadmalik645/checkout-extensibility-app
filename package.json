@@ -11,8 +11,8 @@
     "deploy": "shopify app deploy"
   },
   "dependencies": {
-    "@shopify/app": "3.51.0",
-    "@shopify/cli": "3.51.0",
+    "@shopify/app": "^3.58.2",
+    "@shopify/cli": "^3.66.1",
     "jsonwebtoken": "^9.0.2",
     "uuid": "^9.0.1"
   },
