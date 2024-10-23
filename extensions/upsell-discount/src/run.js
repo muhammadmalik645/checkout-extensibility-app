@@ -25,7 +25,7 @@ export function run(input) {
     let discountPrice = discountProduct.cost.totalAmount.amount - (discountProduct.cost.totalAmount.amount * (discountProduct.discount.value / 100)).toFixed(3)
     let updateOperation = {
       update: {
-        Id: discountProduct.id,
+        cartLineId: discountProduct.id,
         price: {
           adjustment: {
             fixedPricePerUnit: {

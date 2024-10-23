@@ -1,9 +1,7 @@
 (() => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
-  var __defProps = Object.defineProperties;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __getProtoOf = Object.getPrototypeOf;
@@ -21,7 +19,6 @@
       }
     return a;
   };
-  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   var __objRest = (source, exclude) => {
     var target = {};
     for (var prop in source)
@@ -675,7 +672,7 @@
             }
             return ReactElement(element.type, key, ref, self, source, owner, props);
           }
-          function isValidElement2(object) {
+          function isValidElement(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
           }
           var SEPARATOR = ".";
@@ -740,7 +737,7 @@
                   return c;
                 });
               } else if (mappedChild != null) {
-                if (isValidElement2(mappedChild)) {
+                if (isValidElement(mappedChild)) {
                   {
                     if (mappedChild.key && (!_child || _child.key !== mappedChild.key)) {
                       checkKeyStringCoercion(mappedChild.key);
@@ -828,7 +825,7 @@
             }) || [];
           }
           function onlyChild(children) {
-            if (!isValidElement2(children)) {
+            if (!isValidElement(children)) {
               throw new Error("React.Children.only expected to receive a single React element child.");
             }
             return children;
@@ -1081,7 +1078,7 @@
             }
             return false;
           }
-          function memo2(type, compare) {
+          function memo(type, compare) {
             {
               if (!isValidElementType(type)) {
                 error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
@@ -1119,7 +1116,7 @@
             }
             return dispatcher;
           }
-          function useContext3(Context) {
+          function useContext2(Context) {
             var dispatcher = resolveDispatcher();
             {
               if (Context._context !== void 0) {
@@ -1141,7 +1138,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useReducer(reducer, initialArg, init);
           }
-          function useRef2(initialValue) {
+          function useRef(initialValue) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
@@ -1161,7 +1158,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo2(create, deps) {
+          function useMemo(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1559,11 +1556,11 @@
             if (isArray(node)) {
               for (var i = 0; i < node.length; i++) {
                 var child = node[i];
-                if (isValidElement2(child)) {
+                if (isValidElement(child)) {
                   validateExplicitKey(child, parentType);
                 }
               }
-            } else if (isValidElement2(node)) {
+            } else if (isValidElement(node)) {
               if (node._store) {
                 node._store.validated = true;
               }
@@ -1574,7 +1571,7 @@
                   var iterator = iteratorFn.call(node);
                   var step;
                   while (!(step = iterator.next()).done) {
-                    if (isValidElement2(step.value)) {
+                    if (isValidElement(step.value)) {
                       validateExplicitKey(step.value, parentType);
                     }
                   }
@@ -1897,14 +1894,14 @@
           var createElement$1 = createElementWithValidation;
           var cloneElement$1 = cloneElementWithValidation;
           var createFactory = createFactoryWithValidation;
-          var Children2 = {
+          var Children = {
             map: mapChildren,
             forEach: forEachChildren,
             count: countChildren,
             toArray,
             only: onlyChild
           };
-          exports.Children = Children2;
+          exports.Children = Children;
           exports.Component = Component2;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
@@ -1918,13 +1915,13 @@
           exports.createFactory = createFactory;
           exports.createRef = createRef;
           exports.forwardRef = forwardRef;
-          exports.isValidElement = isValidElement2;
+          exports.isValidElement = isValidElement;
           exports.lazy = lazy;
-          exports.memo = memo2;
+          exports.memo = memo;
           exports.startTransition = startTransition;
           exports.unstable_act = act;
           exports.useCallback = useCallback;
-          exports.useContext = useContext3;
+          exports.useContext = useContext2;
           exports.useDebugValue = useDebugValue;
           exports.useDeferredValue = useDeferredValue;
           exports.useEffect = useEffect3;
@@ -1932,9 +1929,9 @@
           exports.useImperativeHandle = useImperativeHandle;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect;
-          exports.useMemo = useMemo2;
+          exports.useMemo = useMemo;
           exports.useReducer = useReducer;
-          exports.useRef = useRef2;
+          exports.useRef = useRef;
           exports.useState = useState3;
           exports.useSyncExternalStore = useSyncExternalStore;
           exports.useTransition = useTransition;
@@ -18194,7 +18191,7 @@
           {
             propTypesMisspellWarningShown = false;
           }
-          function isValidElement2(object) {
+          function isValidElement(object) {
             {
               return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
             }
@@ -18261,11 +18258,11 @@
               if (isArray(node)) {
                 for (var i = 0; i < node.length; i++) {
                   var child = node[i];
-                  if (isValidElement2(child)) {
+                  if (isValidElement(child)) {
                     validateExplicitKey(child, parentType);
                   }
                 }
-              } else if (isValidElement2(node)) {
+              } else if (isValidElement(node)) {
                 if (node._store) {
                   node._store.validated = true;
                 }
@@ -18276,7 +18273,7 @@
                     var iterator = iteratorFn.call(node);
                     var step;
                     while (!(step = iterator.next()).done) {
-                      if (isValidElement2(step.value)) {
+                      if (isValidElement(step.value)) {
                         validateExplicitKey(step.value, parentType);
                       }
                     }
@@ -18401,11 +18398,11 @@
               return jsxWithValidation(type, props, key, false);
             }
           }
-          var jsx5 = jsxWithValidationDynamic;
-          var jsxs2 = jsxWithValidationStatic;
+          var jsx4 = jsxWithValidationDynamic;
+          var jsxs = jsxWithValidationStatic;
           exports.Fragment = REACT_FRAGMENT_TYPE;
-          exports.jsx = jsx5;
-          exports.jsxs = jsxs2;
+          exports.jsx = jsx4;
+          exports.jsxs = jsxs;
         })();
       }
     }
@@ -18423,20 +18420,12 @@
     }
   });
 
-  // extensions/upsell/src/Checkout.jsx
-  var import_react22 = __toESM(require_react());
-
   // node_modules/@remote-ui/rpc/build/esm/memory.mjs
   function isBasicObject(value) {
     if (value == null || typeof value !== "object")
       return false;
     const prototype = Object.getPrototypeOf(value);
     return prototype == null || prototype === Object.prototype;
-  }
-
-  // node_modules/@remote-ui/core/build/esm/component.mjs
-  function createRemoteComponent(componentType) {
-    return componentType;
   }
 
   // node_modules/@remote-ui/core/build/esm/types.mjs
@@ -19090,7 +19079,7 @@
     return [hasChanged ? normalizedNewValue : IGNORE, hotSwaps];
   }
 
-  // node_modules/@shopify/ui-extensions/build/esm/utilities/registration.mjs
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions/build/esm/utilities/registration.mjs
   function createExtensionRegistrationFunction() {
     const extensionWrapper = (target, implementation) => {
       var _shopify;
@@ -19121,47 +19110,11 @@
     return extensionWrapper;
   }
 
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/extension.mjs
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/extension.mjs
   var extension = createExtensionRegistrationFunction();
 
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Banner/Banner.mjs
-  var Banner = createRemoteComponent("Banner");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/BlockStack/BlockStack.mjs
-  var BlockStack = createRemoteComponent("BlockStack");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Button/Button.mjs
-  var Button = createRemoteComponent("Button");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Choice/Choice.mjs
-  var Choice = createRemoteComponent("Choice");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/ChoiceList/ChoiceList.mjs
-  var ChoiceList = createRemoteComponent("ChoiceList");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Heading/Heading.mjs
-  var Heading = createRemoteComponent("Heading");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/InlineLayout/InlineLayout.mjs
-  var InlineLayout = createRemoteComponent("InlineLayout");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/Pressable/Pressable.mjs
-  var Pressable = createRemoteComponent("Pressable");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/ProductThumbnail/ProductThumbnail.mjs
-  var ProductThumbnail = createRemoteComponent("ProductThumbnail");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/SkeletonImage/SkeletonImage.mjs
-  var SkeletonImage = createRemoteComponent("SkeletonImage");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/SkeletonText/SkeletonText.mjs
-  var SkeletonText = createRemoteComponent("SkeletonText");
-
-  // node_modules/@shopify/ui-extensions/build/esm/surfaces/checkout/components/View/View.mjs
-  var View = createRemoteComponent("View");
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
-  var import_react6 = __toESM(require_react(), 1);
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
+  var import_react4 = __toESM(require_react(), 1);
 
   // node_modules/@remote-ui/react/build/esm/render.mjs
   var import_react2 = __toESM(require_react(), 1);
@@ -19358,97 +19311,20 @@
     }), container, null, callback);
   }
 
-  // node_modules/@remote-ui/react/build/esm/components.mjs
-  var import_react4 = __toESM(require_react(), 1);
-  var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
-
-  // node_modules/@remote-ui/react/build/esm/hooks/render.mjs
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/context.mjs
   var import_react3 = __toESM(require_react(), 1);
-  function useRender() {
-    const render3 = (0, import_react3.useContext)(RenderContext);
-    if (render3 == null) {
-      throw new Error("No remote-ui Render instance found in context");
-    }
-    return render3;
-  }
+  var ExtensionApiContext = /* @__PURE__ */ (0, import_react3.createContext)(null);
 
-  // node_modules/@remote-ui/react/build/esm/components.mjs
-  function createRemoteReactComponent(componentType, {
-    fragmentProps
-  } = {}) {
-    if (!fragmentProps || !fragmentProps.length) {
-      return componentType;
-    }
-    const wrapper = createComponentWrapper(componentType, fragmentProps);
-    wrapper.displayName = componentType;
-    return wrapper;
-  }
-  function createComponentWrapper(componentType, fragmentProps) {
-    const Component2 = componentType;
-    return /* @__PURE__ */ (0, import_react4.memo)(function ComponentWrapper(_a) {
-      var _b = _a, {
-        children: externalChildren = []
-      } = _b, externalProps = __objRest(_b, [
-        "children"
-      ]);
-      const fragments = (0, import_react4.useRef)({});
-      const {
-        root,
-        reconciler
-      } = useRender();
-      const {
-        props,
-        children
-      } = (0, import_react4.useMemo)(() => {
-        const portals = [];
-        const props2 = {};
-        for (const key of Object.keys(externalProps)) {
-          const element = externalProps[key];
-          if (fragmentProps.includes(key) && /* @__PURE__ */ (0, import_react4.isValidElement)(element)) {
-            const currentFragment = fragments.current[key];
-            const fragment = isRemoteFragment(currentFragment) ? currentFragment : root.createFragment();
-            fragments.current[key] = fragment;
-            Object.assign(fragment, {
-              createText(...args) {
-                return root.createText(...args);
-              },
-              createComponent(type, ...args) {
-                return root.createComponent(type, ...args);
-              }
-            });
-            const portal = reconciler.createPortal(element, fragment, null, null);
-            portals.push(portal);
-            props2[key] = fragment;
-          } else {
-            props2[key] = element;
-            delete fragments.current[key];
-          }
-        }
-        return {
-          props: props2,
-          children: [...import_react4.Children.toArray(externalChildren), ...portals]
-        };
-      }, [externalChildren, externalProps, root, reconciler, fragments]);
-      return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(Component2, __spreadProps(__spreadValues({}, props), {
-        children
-      }));
-    });
-  }
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/context.mjs
-  var import_react5 = __toESM(require_react(), 1);
-  var ExtensionApiContext = /* @__PURE__ */ (0, import_react5.createContext)(null);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
-  var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/render.mjs
+  var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
   function reactExtension(target, render3) {
     return extension(target, (root, api) => __async(this, null, function* () {
       const element = yield render3(api);
       yield new Promise((resolve, reject) => {
         try {
-          render(/* @__PURE__ */ (0, import_jsx_runtime3.jsx)(ExtensionApiContext.Provider, {
+          render(/* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ExtensionApiContext.Provider, {
             value: api,
-            children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(ErrorBoundary, {
+            children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ErrorBoundary, {
               children: element
             })
           }), root, () => {
@@ -19461,7 +19337,7 @@
       });
     }));
   }
-  var ErrorBoundary = class extends import_react6.Component {
+  var ErrorBoundary = class extends import_react4.Component {
     constructor(...args) {
       super(...args);
       this.state = {
@@ -19488,52 +19364,10 @@ ${errorInfo.componentStack}`);
     }
   };
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Banner/Banner.mjs
-  var Banner2 = createRemoteReactComponent(Banner);
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
+  var import_react6 = __toESM(require_react(), 1);
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/BlockStack/BlockStack.mjs
-  var BlockStack2 = createRemoteReactComponent(BlockStack);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Button/Button.mjs
-  var Button2 = createRemoteReactComponent(Button, {
-    fragmentProps: ["overlay"]
-  });
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Choice/Choice.mjs
-  var Choice2 = createRemoteReactComponent(Choice, {
-    fragmentProps: ["details", "primaryContent", "secondaryContent", "tertiaryContent"]
-  });
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/ChoiceList/ChoiceList.mjs
-  var ChoiceList2 = createRemoteReactComponent(ChoiceList);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Heading/Heading.mjs
-  var Heading2 = createRemoteReactComponent(Heading);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/InlineLayout/InlineLayout.mjs
-  var InlineLayout2 = createRemoteReactComponent(InlineLayout);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/Pressable/Pressable.mjs
-  var Pressable2 = createRemoteReactComponent(Pressable, {
-    fragmentProps: ["overlay"]
-  });
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/ProductThumbnail/ProductThumbnail.mjs
-  var ProductThumbnail2 = createRemoteReactComponent(ProductThumbnail);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/SkeletonImage/SkeletonImage.mjs
-  var SkeletonImage2 = createRemoteReactComponent(SkeletonImage);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/SkeletonText/SkeletonText.mjs
-  var SkeletonText2 = createRemoteReactComponent(SkeletonText);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/components/View/View.mjs
-  var View2 = createRemoteReactComponent(View);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
-  var import_react20 = __toESM(require_react(), 1);
-
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/errors.mjs
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/errors.mjs
   var CheckoutUIExtensionError = class extends Error {
     constructor(...args) {
       super(...args);
@@ -19546,21 +19380,27 @@ ${errorInfo.componentStack}`);
       this.name = "ExtensionHasNoMethodError";
     }
   };
+  var ExtensionHasNoTargetError = class extends Error {
+    constructor(method, target) {
+      super(`Cannot call '${method}()' on target '${target}'. Property 'target' is not found on api.`);
+      this.name = "ExtensionHasNoTargetError";
+    }
+  };
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/api.mjs
   function useApi(_target) {
-    const api = (0, import_react20.useContext)(ExtensionApiContext);
+    const api = (0, import_react6.useContext)(ExtensionApiContext);
     if (api == null) {
       throw new CheckoutUIExtensionError("You can only call this hook when running as a checkout UI extension.");
     }
     return api;
   }
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/subscription.mjs
-  var import_react21 = __toESM(require_react(), 1);
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/subscription.mjs
+  var import_react7 = __toESM(require_react(), 1);
   function useSubscription(subscription) {
-    const [, setValue] = (0, import_react21.useState)(subscription.current);
-    (0, import_react21.useEffect)(() => {
+    const [, setValue] = (0, import_react7.useState)(subscription.current);
+    (0, import_react7.useEffect)(() => {
       let didUnsubscribe = false;
       const checkForUpdates = (newValue) => {
         if (didUnsubscribe) {
@@ -19578,13 +19418,7 @@ ${errorInfo.componentStack}`);
     return subscription.current;
   }
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-lines.mjs
-  function useCartLines() {
-    const {
-      lines
-    } = useApi();
-    return useSubscription(lines);
-  }
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-lines.mjs
   function useApplyCartLinesChange() {
     const api = useApi();
     if ("applyCartLinesChange" in api) {
@@ -19593,245 +19427,109 @@ ${errorInfo.componentStack}`);
     throw new ExtensionHasNoMethodError("applyCartLinesChange", api.extension.target);
   }
 
-  // node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/settings.mjs
-  function useSettings() {
-    const settings = useSubscription(useApi().settings);
-    return settings;
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/cart-line-target.mjs
+  function useCartLineTarget() {
+    const api = useApi();
+    if (!api.target) {
+      throw new ExtensionHasNoTargetError("useCartLineTarget", api.extension.target);
+    }
+    return useSubscription(api.target);
   }
 
-  // extensions/upsell/src/Checkout.jsx
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
-  var Checkout_default = reactExtension("purchase.checkout.block.render", () => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(App, {}));
-  function App() {
-    const { query, i18n, analytics } = useApi();
-    const applyCartLinesChange = useApplyCartLinesChange();
-    const [products, setProducts] = (0, import_react22.useState)([]);
-    const [loading, setLoading] = (0, import_react22.useState)(false);
-    const [updating, setUpdating] = (0, import_react22.useState)(false);
-    const [showError, setShowError] = (0, import_react22.useState)(false);
-    const [selectedProduct, setSelectedProduct] = (0, import_react22.useState)("none");
-    const lines = useCartLines();
-    const { heading, product_heading1, product_heading2 } = useSettings();
-    (0, import_react22.useEffect)(() => {
-      (() => __async(this, null, function* () {
-        const ids = yield getUpsellProducts();
-        fetchProducts(ids);
-      }))();
-    }, []);
-    (0, import_react22.useEffect)(() => {
-      if (showError) {
-        const timer = setTimeout(() => setShowError(false), 3e3);
-        return () => clearTimeout(timer);
+  // extensions/prefix-discounter/node_modules/@shopify/ui-extensions-react/build/esm/surfaces/checkout/hooks/discounts.mjs
+  function useDiscountCodes() {
+    const {
+      discountCodes
+    } = useApi();
+    return useSubscription(discountCodes);
+  }
+
+  // extensions/prefix-discounter/src/Checkout.jsx
+  var import_react8 = __toESM(require_react());
+  var import_jsx_runtime3 = __toESM(require_jsx_runtime());
+  var Checkout_default = reactExtension("purchase.checkout.cart-line-item.render-after", () => /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(Extension, {}));
+  function applyDiscounter(discounts) {
+    console.log("discount to be Applied", discounts);
+    let applicableDiscounts = [];
+    discounts.forEach((discount) => {
+      if (discount.code.includes("OFF")) {
+        let modifiedDiscount = __spreadValues({}, discount);
+        modifiedDiscount.code = discount.code.replace("-OFF", "");
+        applicableDiscounts.push(modifiedDiscount);
       }
-    }, [showError]);
-    function handleUpdateCart(productId, variantId, inCart) {
-      return __async(this, null, function* () {
-        const lineItem = lines.find((line) => line.merchandise.id === variantId);
-        if (inCart && !lineItem) {
-          console.error("Line item not found in the cart when attempting to remove.");
-          return;
-        }
-        const changes = inCart ? {
-          id: lineItem.id,
-          // For removing items
-          quantity: 0,
-          // Set quantity to 0 to remove the item
-          type: "updateCartLine"
-        } : {
-          merchandiseId: variantId,
-          // For adding items
-          quantity: 1,
-          // Quantity to add
-          type: "addCartLine"
-        };
-        setUpdating(variantId);
-        try {
-          const result = yield applyCartLinesChange(changes);
-          if (result.type === "error") {
-            setShowError(true);
-            console.error("Error applying cart lines change:", result.message);
-          } else {
-            publishRedditUpdateCart(inCart);
-          }
-        } catch (error) {
-          setShowError(true);
-          console.error("Unexpected error applying cart lines change:", error);
-        } finally {
-          setUpdating(false);
-        }
-      });
-    }
-    function publishRedditUpdateCart(inCart) {
-      analytics.publish(`reddit-${inCart ? "remove-from" : "add-to"}-cart`, {
-        extensionName: "upsell"
-      }).then((result) => {
-        if (result) {
-          console.log(`successfully published event: reddit-${inCart ? "remove-from" : "add-to"}-cart`);
-        } else {
-          console.log(`failed to publish event: reddit-${inCart ? "remove-from" : "add-to"}-cart`);
-        }
-      }).catch((error) => {
-        console.log(`failed to publish event: reddit-${inCart ? "remove-from" : "add-to"}-cart`);
-        console.log("error", error);
-      });
-    }
-    function getUpsellProducts() {
-      return __async(this, null, function* () {
-        var _a, _b;
-        try {
-          const { data } = yield query(`
-        query getUpsellProducts {
-          metaobjects(type: "checkout_upsell", first: 2) {
-            nodes {
-              checkout_upsell_products: field(key: "giftwrap_items") {
-                value
-              }
-            }
+    });
+    return applicableDiscounts;
+  }
+  function Extension() {
+    const { query } = useApi();
+    const [lineItem, setLineItem] = (0, import_react8.useState)(null);
+    const discounts = useDiscountCodes();
+    const product = useCartLineTarget();
+    const applyCartLinesChange = useApplyCartLinesChange();
+    console.log("discounts", discounts);
+    console.log("Cart Line", product);
+    const fetchProducts = (id) => __async(this, null, function* () {
+      try {
+        const data = yield query(`
+        {
+          product(id: "${id}") {
+            description
+            tags
           }
         }
       `);
-          const upsell_products = (_b = (_a = data.metaobjects.nodes[0]) == null ? void 0 : _a.checkout_upsell_products) == null ? void 0 : _b.value;
-          return upsell_products;
-        } catch (error) {
-          console.error(error);
-        }
-      });
-    }
-    function fetchProducts(ids) {
-      return __async(this, null, function* () {
-        setLoading(true);
-        try {
-          const { data } = yield query(
-            `{
-          nodes(
-            ids: ${ids}
-          ) {
-            ... on Product {
-              id
-              title
-              description
-              images(first: 1) {
-                nodes {
-                  url
-                }
-              }
-              variants(first: 1) {
-                nodes {
-                  id
-                  title
-                  price {
-                    amount
-                  }
-                }
-              }
-            }
-          }
-        }`
-          );
-          const limitedProducts = data.nodes.slice(0, 2);
-          setProducts(limitedProducts);
-          const inCartProduct = limitedProducts.find(
-            (product) => lines.some((line) => line.merchandise.id === product.variants.nodes[0].id)
-          );
-          if (inCartProduct) {
-            setSelectedProduct(inCartProduct.variants.nodes[0].id);
-          }
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
-      });
-    }
-    if (loading) {
-      return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(LoadingSkeleton, { heading });
-    }
-    if (!loading && products.length === 0) {
-      return null;
-    }
-    const handleChoiceChange = (selectedValue) => __async(this, null, function* () {
-      setSelectedProduct(selectedValue);
-      const inCartProductIds = lines.map((line) => line.merchandise.id);
-      for (const product of products) {
-        const variantId = product.variants.nodes[0].id;
-        if (variantId !== selectedValue && inCartProductIds.includes(variantId)) {
-          yield handleUpdateCart(product.id, variantId, true);
-        }
-      }
-      if (selectedValue !== "none") {
-        const selectedProduct2 = products.find((product) => product.variants.nodes[0].id === selectedValue);
-        if (selectedProduct2) {
-          yield handleUpdateCart(selectedProduct2.id, selectedValue, false);
-        }
+        console.log("Cart Line tags", data.data.product);
+        setLineItem(data.data.product);
+      } catch (error) {
+        console.error(error);
       }
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
-      ProductOffer,
-      {
-        products,
-        selectedProduct,
-        handleChoiceChange,
-        updating,
-        showError,
-        lines,
-        heading,
-        product_heading1,
-        product_heading2
+    const attributeUpdater = (product2, applicableDiscounts) => __async(this, null, function* () {
+      let attributesArray = [];
+      applicableDiscounts.forEach((discount) => {
+        attributesArray.push({
+          key: "discountAdd",
+          value: `${discount.code}`
+        });
+      });
+      console.log("attributesArray", attributesArray);
+      const result = yield applyCartLinesChange({
+        type: "updateCartLine",
+        id: product2.id,
+        quantity: product2.quantity,
+        attributes: attributesArray
+      });
+      if (result.type === "error") {
+        setShowError(true);
+        console.error(result.message);
       }
-    );
-  }
-  function LoadingSkeleton({ heading }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(BlockStack2, { spacing: "loose", border: "base", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Heading2, { inlineAlignment: "center", level: 2, children: heading || "GIFT WRAP ITEMS" }),
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(BlockStack2, { spacing: "loose", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(InlineLayout2, { spacing: "base", columns: [64, "fill", "auto"], blockAlignment: "center", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SkeletonImage2, { aspectRatio: 1 }),
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(BlockStack2, { spacing: "none", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SkeletonText2, { inlineSize: "large" }),
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(SkeletonText2, { inlineSize: "small" })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Button2, { kind: "secondary", disabled: true, children: "Add" })
-      ] }) })
-    ] });
-  }
-  function ProductOffer({
-    products,
-    selectedProduct,
-    handleChoiceChange,
-    showError,
-    heading,
-    product_heading1,
-    product_heading2
-  }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(View2, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(BlockStack2, { padding: "base", border: "base", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Heading2, { inlineAlignment: "left", level: 2, children: heading || "CHOOSE A GIFT WRAP OPTION" }),
-      /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
-        ChoiceList2,
-        {
-          inlineAlignment: "center",
-          title: "Select an option",
-          value: selectedProduct,
-          blockAlignment: "center",
-          onChange: handleChoiceChange,
-          children: [
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Choice2, { id: "none", children: "None" }),
-            products.map((product, index) => {
-              var _a;
-              return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(InlineLayout2, { spacing: "base", blockAlignment: "center", columns: ["auto", "fill"], children: [
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Choice2, { id: product.variants.nodes[0].id }, product.id),
-                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Pressable2, { onPress: handleChoiceChange, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(InlineLayout2, { spacing: "base", blockAlignment: "center", columns: ["auto", "fill"], children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(View2, { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(ProductThumbnail2, { source: (_a = product.images.nodes[0]) == null ? void 0 : _a.url, border: "none" }) }),
-                  /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(View2, { children: index === 0 ? product_heading1 || product.title : product_heading2 || product.title })
-                ] }) })
-              ] });
-            })
-          ]
+    });
+    (0, import_react8.useEffect)(() => {
+      const fetchData = () => __async(this, null, function* () {
+        if (product && product.merchandise && product.merchandise.product) {
+          yield fetchProducts(product.merchandise.product.id);
         }
-      ),
-      showError && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(ErrorBanner, {})
-    ] }) });
-  }
-  function ErrorBanner() {
-    return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Banner2, { status: "critical", children: "There was an issue updating the cart. Please try again." });
+      });
+      fetchData();
+    }, []);
+    (0, import_react8.useEffect)(() => {
+      if (!lineItem)
+        return;
+      let applyDiscount = true;
+      const tags = lineItem.tags || [];
+      console.log("tags", tags);
+      tags.forEach((tag) => {
+        if (tag === "no-discount") {
+          applyDiscount = false;
+        }
+      });
+      if (applyDiscount) {
+        console.log("discounts", discounts);
+        let applicableDiscounts = applyDiscounter(discounts);
+        attributeUpdater(product, applicableDiscounts);
+      }
+    }, [lineItem]);
+    return null;
   }
 })();
-//# sourceMappingURL=upsell.js.map
+//# sourceMappingURL=prefix-discounter.js.map

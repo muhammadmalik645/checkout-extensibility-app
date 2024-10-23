@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Banner,
   Text,
@@ -11,14 +11,12 @@ import {
   useApplyCartLinesChange,
   useApi,
   useSettings,
-
 } from '@shopify/ui-extensions-react/checkout';
-
 
 // const checkoutBlock = reactExtension('purchase.checkout.block.render',() => <Extension/>)
 // export { checkoutBlock }
 
-export default reactExtension('purchase.checkout.cart-line-item.render-after', ()=> <Extension/>)
+export default reactExtension('purchase.checkout.cart-line-item.render-after', () => <Extension />);
 
 function Extension() {
   const { query, i18n } = useApi();
@@ -27,12 +25,11 @@ function Extension() {
   const [loading, setLoading] = useState(false);
 
   const merch = useCartLineTarget();
-  const productID = merch.merchandise.product.id
-  
+  const productID = merch.merchandise.product.id;
+
   useEffect(() => {
     (async () => {
       await fetchProducts(productID);
-      
     })();
   }, []);
 
@@ -42,32 +39,32 @@ function Extension() {
       const data = await query(
         `{
           product(id: "${id}") {
-            metafield(namespace:"custom",key: "banner") {
-              value
-              key
-            }
             description
+            tags
           }
         }`
       );
-      console.log(data.data.product.metafield.value)      
+      console.log(data.data.product.metafield.value);
       setProducts(data.data.product.metafield.value);
-      
-
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
   }
-  
-  const {title: merchantTitle, description: merchantDesc, collapsible: collapsibleStatus, status: merchantStatus} = useSettings();
+
+  const {
+    title: merchantTitle,
+    description: merchantDesc,
+    collapsible: collapsibleStatus,
+    status: merchantStatus,
+  } = useSettings();
 
   const status = merchantStatus ?? 'info';
   const titleBanner = merchantTitle ?? 'Custom Banner';
   const description = merchantDesc ?? 'This is the description';
-  const collapsible= collapsibleStatus ?? true
-  let productMetafield = products ?? "empty"
+  const collapsible = collapsibleStatus ?? true;
+  let productMetafield = products ?? 'empty';
 
   return (
     <Banner title={titleBanner} status={status} collapsible={collapsible}>

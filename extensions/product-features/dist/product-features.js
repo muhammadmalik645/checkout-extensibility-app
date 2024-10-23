@@ -19558,11 +19558,8 @@ ${errorInfo.componentStack}`);
           const data = yield query(
             `{
           product(id: "${id}") {
-            metafield(namespace:"custom",key: "banner") {
-              value
-              key
-            }
             description
+            tags
           }
         }`
           );
@@ -19575,7 +19572,12 @@ ${errorInfo.componentStack}`);
         }
       });
     }
-    const { title: merchantTitle, description: merchantDesc, collapsible: collapsibleStatus, status: merchantStatus } = useSettings();
+    const {
+      title: merchantTitle,
+      description: merchantDesc,
+      collapsible: collapsibleStatus,
+      status: merchantStatus
+    } = useSettings();
     const status = merchantStatus != null ? merchantStatus : "info";
     const titleBanner = merchantTitle != null ? merchantTitle : "Custom Banner";
     const description = merchantDesc != null ? merchantDesc : "This is the description";
